@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\zacha\\.nuget\\packages\\": {}
+    "C:\\Users\\schan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zacha\\source\\repos\\midtermProject\\GC-AHBC-midterm-ZT-SS-AC\\GC-AHBC-midterm-ZT-SS-AC\\GC-AHBC-midterm-ZT-SS-AC.csproj",
+      "projectUniqueName": "C:\\Users\\schan\\Documents\\Web Development\\Education\\Grand Circus\\Full Stack C# .NET Bootcamp\\MidTermProject\\GC-AHBC-midterm-ZT-SS-AC\\GC-AHBC-midterm-ZT-SS-AC\\GC-AHBC-midterm-ZT-SS-AC.csproj",
       "projectName": "GC-AHBC-midterm-ZT-SS-AC",
-      "projectPath": "C:\\Users\\zacha\\source\\repos\\midtermProject\\GC-AHBC-midterm-ZT-SS-AC\\GC-AHBC-midterm-ZT-SS-AC\\GC-AHBC-midterm-ZT-SS-AC.csproj",
-      "packagesPath": "C:\\Users\\zacha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zacha\\source\\repos\\midtermProject\\GC-AHBC-midterm-ZT-SS-AC\\GC-AHBC-midterm-ZT-SS-AC\\obj\\",
+      "projectPath": "C:\\Users\\schan\\Documents\\Web Development\\Education\\Grand Circus\\Full Stack C# .NET Bootcamp\\MidTermProject\\GC-AHBC-midterm-ZT-SS-AC\\GC-AHBC-midterm-ZT-SS-AC\\GC-AHBC-midterm-ZT-SS-AC.csproj",
+      "packagesPath": "C:\\Users\\schan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\schan\\Documents\\Web Development\\Education\\Grand Circus\\Full Stack C# .NET Bootcamp\\MidTermProject\\GC-AHBC-midterm-ZT-SS-AC\\GC-AHBC-midterm-ZT-SS-AC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\zacha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\schan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
