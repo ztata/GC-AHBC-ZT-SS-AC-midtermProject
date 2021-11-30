@@ -19,6 +19,4 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         menuItem11,
         menuItem12
     }
-
-   
 }
