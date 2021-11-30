@@ -7,6 +7,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
         }
     }
 }
