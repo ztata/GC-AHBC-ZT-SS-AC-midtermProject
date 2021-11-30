@@ -21,9 +21,10 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         continue;
                     }
                     MenuItem product = new MenuItem();
-                    product.Category = items[0];
-                    product.Description = items[1];
-                    product.Price = items[2];
+                    product.Name = items[0];
+                    product.Category = items[1];
+                    product.Description = items[2];
+                    product.Price = items[3];
                     productList.Add(product);
                 }
             }
@@ -34,6 +35,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         {
             StreamWriter writer = new StreamWriter(path, true);
             StringBuilder builder = new StringBuilder();
+            builder.Append(product.Name);
+            builder.Append("|");
             builder.Append(product.Category);
             builder.Append("|");
             builder.Append(product.Description);
