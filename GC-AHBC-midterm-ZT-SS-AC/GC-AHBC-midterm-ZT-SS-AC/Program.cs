@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GC_AHBC_midterm_ZT_SS_AC
 {
@@ -15,6 +16,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
             bool runProgramAgain = true;
             string userInput = "";
+            int numberToOrder = -1;
 
             do//repeats the program if the user chooses
             {
@@ -68,42 +70,130 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         userMenuSelection = (Menu)userChoice;
                     }
 
+                    bool validOrderNumber = false;
+                    while (validOrderNumber == false)
+                    {
+                        Console.WriteLine("How many of these would you like to order?");
+                        userInput = Console.ReadLine();
+                        try
+                        {
+                            numberToOrder = int.Parse(userInput);
+                           
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Sorry, that is not a valid input!");
+                            validOrderNumber = false;
+                        }
+                        if (numberToOrder < 1)
+                        {
+                            Console.WriteLine("Sorry, you can't order less than 1 of an item!");
+                        }
+                        else
+                        {
+                            validOrderNumber = true;
+                        }
+                    }
 
                     //switch will add user choice to the list for their current order 
                     switch (userMenuSelection)
                     {
                         case Menu.menuItem1:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* first item*/);
+                            }
                             break;
                         case Menu.menuItem2:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* second item*/);
+                            }
                             break;
                         case Menu.menuItem3:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* third item*/);
+                            }
                             break;
                         case Menu.menuItem4:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* fourth item*/);
+                            }
                             break;
                         case Menu.menuItem5:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* fifth item*/);
+                            }
                             break;
                         case Menu.menuItem6:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* sixth item*/);
+                            }
                             break;
                         case Menu.menuItem7:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* seventh item*/);
+                            }
                             break;
                         case Menu.menuItem8:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* eighth item*/);
+                            }
                             break;
                         case Menu.menuItem9:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* ninth item*/);
+                            }
                             break;
                         case Menu.menuItem10:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* tenth item*/);
+                            }
                             break;
                         case Menu.menuItem11:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* eleventh item*/);
+                            }
                             break;
                         case Menu.menuItem12:
+                            for (int i = 0; i < numberToOrder; i++)
+                            {
+                                currentOrderList.Add(/* twelveth item*/);
+                            }
                             break;
-                        default:
-                            break;
+                    }
+
+                    Console.WriteLine("Would you like to order another item?");
+                    Console.Write("Enter y to continue your order or anything else to proceed to checkout: ");
+                    userInput = Console.ReadLine();
+                    if (userInput.Trim().ToLower() == "y")
+                    {
+                        orderAnotherItem = true;
+                    }
+                    else
+                    {
+                        orderAnotherItem = false;
                     }
 
 
 
 
                 }
+
+                /*
+                 * 
+                 * INSERT LOGIC HERE TO TOTAL THE BILL, RECEIVE PAYMENT, ETC
+                 * 
+                 */
 
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
