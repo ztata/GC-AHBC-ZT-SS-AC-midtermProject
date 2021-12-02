@@ -338,5 +338,19 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         {
             return amountTendered - totalPrice;
         }
+
+        public static void PrintReceipt(double subtotal, double salesTax, double grandTotal, string PaymentMethod, List<Product> currentOrderList)
+        {
+            Console.WriteLine("****************Thank you for shopping at Jitters Coffee House****************");
+            foreach (Product x in currentOrderList)
+            {
+                Console.WriteLine($"{Quantity} {userMenuSelection}"); //I want this to display a line for each item but I am not sure it this is correct...
+            }
+            Console.WriteLine($"SUBTOTAL: {subtotal}");
+            Console.WriteLine($"TAX: {salesTax}";
+            Console.WriteLine($"GRAND TOTAL: {grandTotal}";
+            Console.WriteLine($"PAYMENT METHOD: {PaymentMethod}";
+            Console.WriteLine("****************Can't wait to see you again soon!****************");
+        }
     }
 }
