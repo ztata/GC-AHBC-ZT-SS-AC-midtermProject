@@ -10,9 +10,9 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         {
             Console.Title = "Full Stack After Hours Bootcamp Midterm Project";
 
-            string addressPath = @"C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\productList.txt";
+            string addressPath = @"C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\MenuItems.txt";
 
-            FileHelper.BuildMenuList(addressPath);
+            Product[] productList =  FileHelper.BuildMenuList(addressPath);
 
             bool runProgramAgain = true;
             string userInput = "";

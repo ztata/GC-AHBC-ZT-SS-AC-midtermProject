@@ -8,12 +8,13 @@ namespace GC_AHBC_midterm_ZT_SS_AC
     public static class FileHelper
     {
         // Reads the file for the menu items
-        public static List<MenuItem> BuildMenuList (string path)
+        public static Product[] BuildMenuList (string path)
         {
-            List<MenuItem> productList = new List<MenuItem>();
+            Product[] productArray = new Product[12];
             using (StreamReader reader = new StreamReader(path))
             {
                 string lineText;
+                int counter = 0;
                 while ((lineText = reader.ReadLine()) != null)
                 {
                     string[] items = lineText.Split('|');
@@ -21,19 +22,20 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     {
                         continue;
                     }
-                    MenuItem product = new MenuItem();
+                    Product product = new Product();
                     product.Name = items[0];
-                    product.Category = items[1];
-                    product.Description = items[2];
-                    product.Price = items[3];
-                    productList.Add(product);
+                    product.Price = double.Parse(items[1]);
+                    product.Category = items[2];
+                    product.Description = items[3];
+                    productArray[counter] = product;
+                    counter++;
                 }
             }
-            return productList;
+            return productArray;
         }
 
         // Adds a product to the file
-        public static void AddProductToFile(string path, MenuItem product)
+        public static void AddProductToFile(string path, Product product)
         {
             StreamWriter writer = new StreamWriter(path, true);
             StringBuilder builder = new StringBuilder();
