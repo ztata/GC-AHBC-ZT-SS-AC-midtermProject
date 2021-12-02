@@ -209,7 +209,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
             /*
              * 
-             * INSERT LOGIC HERE TO TOTAL THE BILL, RECEIVE PAYMENT, ETC
+             * INSERT UI HERE TO PRESENT RECEIPT AND TOTALS ETC 
              * 
              */
 
@@ -293,26 +293,64 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 }                
                 goto TryAgain;
             PayByCheck:
-                /*
-                 * 
-                 * 
-                 * 
-                 * 
-                 * 
-                 * 
-                 * 
-                 */
+                bool validCheckNumber = false;
+                while (validCheckNumber == false)
+                {
+                    Console.WriteLine("What is the four digit check number from the check you would like to pay with (numbers only please)?");
+                    userInput = Console.ReadLine();
+                    validCheckNumber = BillingRegexMethods.ValidateCheckNumber(userInput.Trim());
+                    if (validCheckNumber == false)
+                    {
+                        Console.WriteLine("Sorry, that is not a valid check number.");
+                        Console.WriteLine("Please re-enter a valid four didgit check number.");
+                    }
+                }
+                Console.WriteLine("Thank you for your payment, enjoy your purchases and come again!");
                 goto TryAgain;
+
             PayByCard:
-            /*
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             */
+                bool validCardNumber = false;
+                bool validExpirationDate = false;
+                bool validCWCode = false;
+
+                while (validCardNumber == false)
+                {
+                    Console.WriteLine("Please enter the number on the card you would like to use in the following format(dashes included): XXXX-XXXX-XXXX-XXXX");
+                    userInput = Console.ReadLine();
+                    validCardNumber = BillingRegexMethods.ValidateCardNumber(userInput.Trim());
+                    if (validCardNumber == false)
+                    {
+                        Console.WriteLine("Sorry, that is not a valid card number.");
+                        Console.WriteLine("Please re-enter a valid card number.");
+                    }
+                }
+                Console.WriteLine("Thank you!");
+                while (validExpirationDate == false)
+                {
+                    Console.WriteLine("Please enter the expiration date on your card using the following format (slashes included): MM/YYYY");
+                    userInput = Console.ReadLine();
+                    validExpirationDate = BillingRegexMethods.ValidateExpirationDate(userInput.Trim());
+                    if (validExpirationDate == false)
+                    {
+                        Console.WriteLine("Sorry, that is not a valid expiration date.");
+                        Console.WriteLine("Please re-enter a valid date.");
+                    }
+                }
+                Console.WriteLine("Thank you, only more more piece of info is required.");
+                while (validCWCode == false)
+                {
+                    Console.WriteLine("Please enter the 3 digit CW code on your card: ");
+                    userInput = Console.ReadLine();
+                    validCWCode = BillingRegexMethods.ValidateCWCode(userInput.Trim());
+                    if (validCWCode == false)
+                    {
+                        Console.WriteLine("Sorry, that is not a valid CW code.");
+                        Console.WriteLine("Please re-enter a valid code.");
+                    }
+                }
+                Console.WriteLine("All set!");
+                Console.WriteLine("Thank you for your payment, enjoy your purchases and come again!");
+            
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
                 Console.Write("Enter y to coninue or anything else to quit: ");
