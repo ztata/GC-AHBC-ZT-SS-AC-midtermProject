@@ -25,18 +25,18 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 //displays the menu and prices for items available at the shop 
                 Console.WriteLine("Please see the menu below: ");
                 Console.WriteLine("-------------------------------");
-                Console.WriteLine($"{Menu.menuItem1}). Menu Item 1 -- Price");
-                Console.WriteLine($"{Menu.menuItem2}). Menu Item 2 -- Price");
-                Console.WriteLine($"{Menu.menuItem3}). Menu Item 3 -- Price");
-                Console.WriteLine($"{Menu.menuItem4}). Menu Item 4 -- Price");
-                Console.WriteLine($"{Menu.menuItem5}). Menu Item 5 -- Price");
-                Console.WriteLine($"{Menu.menuItem6}). Menu Item 6 -- Price");
-                Console.WriteLine($"{Menu.menuItem7}). Menu Item 7 -- Price");
-                Console.WriteLine($"{Menu.menuItem8}). Menu Item 8 -- Price");
-                Console.WriteLine($"{Menu.menuItem9}). Menu Item 9 -- Price");
-                Console.WriteLine($"{Menu.menuItem10}). Menu Item 10 -- Price");
-                Console.WriteLine($"{Menu.menuItem11}). Menu Item 11 -- Price");
-                Console.WriteLine($"{Menu.menuItem12}). Menu Item 12 -- Price");
+                Console.WriteLine($"{Menu.caffeMocha}). Caffe Mocha -- $4.95");
+                Console.WriteLine($"{Menu.caffeAmericano}). Caffe Americano -- $3.95");
+                Console.WriteLine($"{Menu.cappucino}). Cappucino -- $5.95");
+                Console.WriteLine($"{Menu.caffeMisto}). Caffe Misto -- $2.95");
+                Console.WriteLine($"{Menu.chaiTeaLatte}). Chai Tea Latte -- $3.95");
+                Console.WriteLine($"{Menu.londonFogTeaLatte}). London Fog Tea Latte -- $2.95");
+                Console.WriteLine($"{Menu.matchaTeaLatte}). Matcha Tea Latte -- $4.95");
+                Console.WriteLine($"{Menu.earlGrey}). Earl Grey -- $2.95");
+                Console.WriteLine($"{Menu.cranberryScones}). Cranberry Scone -- $6.25");
+                Console.WriteLine($"{Menu.icedLemonLoaf}). Iced Lemon Loaf -- $5.95");
+                Console.WriteLine($"{Menu.vanillaBeanScone}). Vanilla Bean Scone -- $2.25");
+                Console.WriteLine($"{Menu.plainBagel}). Plain Bagel -- $2.95");
 
                 //list of items the patron has ordered 
                 List<ImenuItem> currentOrderList = new List<ImenuItem>();
@@ -104,73 +104,73 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     //switch will add user choice to the list for their current order 
                     switch (userMenuSelection)
                     {
-                        case Menu.menuItem1:
+                        case Menu.caffeMocha:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* first item*/);
                             }
                             break;
-                        case Menu.menuItem2:
+                        case Menu.caffeAmericano:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* second item*/);
                             }
                             break;
-                        case Menu.menuItem3:
+                        case Menu.cappucino:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* third item*/);
                             }
                             break;
-                        case Menu.menuItem4:
+                        case Menu.caffeMisto:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* fourth item*/);
                             }
                             break;
-                        case Menu.menuItem5:
+                        case Menu.chaiTeaLatte:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* fifth item*/);
                             }
                             break;
-                        case Menu.menuItem6:
+                        case Menu.londonFogTeaLatte:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* sixth item*/);
                             }
                             break;
-                        case Menu.menuItem7:
+                        case Menu.matchaTeaLatte:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* seventh item*/);
                             }
                             break;
-                        case Menu.menuItem8:
+                        case Menu.earlGrey:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* eighth item*/);
                             }
                             break;
-                        case Menu.menuItem9:
+                        case Menu.cranberryScones:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* ninth item*/);
                             }
                             break;
-                        case Menu.menuItem10:
+                        case Menu.icedLemonLoaf:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* tenth item*/);
                             }
                             break;
-                        case Menu.menuItem11:
+                        case Menu.vanillaBeanScone:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* eleventh item*/);
                             }
                             break;
-                        case Menu.menuItem12:
+                        case Menu.plainBagel:
                             for (int i = 0; i < numberToOrder; i++)
                             {
                                 currentOrderList.Add(/* twelveth item*/);
