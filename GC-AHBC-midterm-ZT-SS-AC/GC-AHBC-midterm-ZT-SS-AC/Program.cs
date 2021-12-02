@@ -350,7 +350,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             Console.WriteLine($"TAX: {salesTax}";
             Console.WriteLine($"GRAND TOTAL: {grandTotal}";
             Console.WriteLine($"PAYMENT METHOD: {PaymentMethod}";
-            Console.WriteLine("****************Can't wait to see you again soon!****************");
+            Console.WriteLine("***************Can't wait to see you again soon!***************");
         }
     }
 }
