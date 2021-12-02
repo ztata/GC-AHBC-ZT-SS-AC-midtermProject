@@ -16,7 +16,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
             bool runProgramAgain = true;
             string userInput = "";
-            int numberToOrder = -1; 
+            int numberToOrder = -1;
+            int userChoice = -1;
 
             do//repeats the program if the user chooses
             {
@@ -39,7 +40,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 Console.WriteLine($"{Menu.plainBagel}). Plain Bagel -- $2.95");
 
                 //list of items the patron has ordered 
-                List<ImenuItem> currentOrderList = new List<ImenuItem>();
+                List<Products> currentOrderList = new List<Products>();
 
 
                 //bool value that allows them to loop and order another item 
@@ -49,7 +50,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 {
                     Console.WriteLine("Please enter the number preceeding the item you would like to order: ");
                     userInput = Console.ReadLine();
-                    int userChoice = -1;
+                    userChoice = -1;
 
                     //FIX THE LOOP AROUND THE TRY CATCH//
                     bool validOrderNumber = false;
@@ -191,12 +192,99 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     }
                 }
 
+                double miSalesTax = 0.06;
+                double subtotal = BillingTotal.SubTotal(currentOrderList);
+                double salesTax = BillingTotal.SalesTax(subtotal, miSalesTax);
+                double grandTotal = BillingTotal.GrandTotal(subtotal, salesTax);
+
 
             /*
              * 
              * INSERT LOGIC HERE TO TOTAL THE BILL, RECEIVE PAYMENT, ETC
              * 
              */
+
+            PaymentMethod:
+                userChoice = -1;
+                bool validPaymentTypeChoice = false;
+                while (validPaymentTypeChoice == false)
+                {
+                    Console.WriteLine("How would you like to pay for todays order?");
+                    Console.WriteLine($"{PaymentMethod.cash}). Cash");
+                    Console.WriteLine($"{PaymentMethod.check}). Check");
+                    Console.WriteLine($"{PaymentMethod.creditCard}). Credit Card ");
+                    Console.WriteLine("Please enter the number preceeding your choice.");
+                    userInput = Console.ReadLine();
+                    try
+                    {
+                        userChoice = int.Parse(userInput);
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Sorry, that is not a valid input type!");
+                        continue;
+                    }
+
+                    if (userChoice < 1 || userChoice > 3)
+                    {
+                        Console.WriteLine("Sorry, your number has to be one of the 3 displayed above!");
+                        continue;
+                    }
+                    else
+                    {
+                        validPaymentTypeChoice = true;
+                    }
+                }
+                PaymentMethod paymentChoice = (PaymentMethod)userChoice;
+
+                switch (paymentChoice)
+                {
+                    case PaymentMethod.cash:
+                        goto PayByCash;
+                        break;
+                    case PaymentMethod.check:
+                        goto PayByCheck;
+                        break;
+                    case PaymentMethod.creditCard:
+                        goto PayByCard;
+                        break;
+                }
+
+            PayByCash:
+                bool validAmountTendered = false;
+                double amountTendered = 0.0;
+                while (validAmountTendered == false)
+                {
+                    Console.WriteLine("How much are you providing for payment?");
+                    userInput = Console.ReadLine();
+                    try
+                    {
+                        amountTendered = double.Parse(userInput);
+                        validAmountTendered = true;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Sorry, we only expect payment in USD!");
+                        continue;
+                    }
+                    double change = MakeChange(amountTendered, grandTotal);
+                    if (change < 1)
+                    {
+                        Console.WriteLine("Sorry, we are going to need a little more than that!");
+                        continue;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Thanks -- enjoy your purchases and come again!");
+                        validAmountTendered = true;
+                    }
+                }                
+                goto TryAgain;
+            PayByCheck:
+
+                goto TryAgain;
+            PayByCard:
+
 
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
@@ -217,6 +305,11 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             Console.WriteLine("Thank you for shopping at Jitters Coffee House!");
             Console.WriteLine("Please press any key to continue: ");
             Console.ReadKey();
+        }
+
+        public static double MakeChange (double amountTendered, double totalPrice)
+        {
+            return amountTendered - totalPrice;
         }
     }
 }
