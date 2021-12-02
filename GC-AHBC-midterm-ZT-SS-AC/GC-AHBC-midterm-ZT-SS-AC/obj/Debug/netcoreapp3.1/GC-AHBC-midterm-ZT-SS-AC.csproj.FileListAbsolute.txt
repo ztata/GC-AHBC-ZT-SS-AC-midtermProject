@@ -12,3 +12,10 @@ C:\Users\zacha\source\repos\midtermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midt
 C:\Users\zacha\source\repos\midtermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midterm-ZT-SS-AC\obj\Debug\netcoreapp3.1\GC-AHBC-midterm-ZT-SS-AC.dll
 C:\Users\zacha\source\repos\midtermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midterm-ZT-SS-AC\obj\Debug\netcoreapp3.1\GC-AHBC-midterm-ZT-SS-AC.pdb
 C:\Users\zacha\source\repos\midtermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midterm-ZT-SS-AC\obj\Debug\netcoreapp3.1\GC-AHBC-midterm-ZT-SS-AC.genruntimeconfig.cache
+C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midterm-ZT-SS-AC\obj\Debug\netcoreapp3.1\GC-AHBC-midterm-ZT-SS-AC.csproj.AssemblyReference.cache
+C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midterm-ZT-SS-AC\obj\Debug\netcoreapp3.1\GC-AHBC-midterm-ZT-SS-AC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midterm-ZT-SS-AC\obj\Debug\netcoreapp3.1\GC-AHBC-midterm-ZT-SS-AC.AssemblyInfoInputs.cache
+C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midterm-ZT-SS-AC\obj\Debug\netcoreapp3.1\GC-AHBC-midterm-ZT-SS-AC.AssemblyInfo.cs
+C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midterm-ZT-SS-AC\obj\Debug\netcoreapp3.1\GC-AHBC-midterm-ZT-SS-AC.csproj.CoreCompileInputs.cache
+C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midterm-ZT-SS-AC\obj\Debug\netcoreapp3.1\GC-AHBC-midterm-ZT-SS-AC.dll
+C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\GC-AHBC-midterm-ZT-SS-AC\obj\Debug\netcoreapp3.1\GC-AHBC-midterm-ZT-SS-AC.pdb
