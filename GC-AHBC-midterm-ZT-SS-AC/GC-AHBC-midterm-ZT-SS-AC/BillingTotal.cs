@@ -4,13 +4,13 @@ using System.Text;
 
 namespace GC_AHBC_midterm_ZT_SS_AC
 {
-    public class BillingTotal
+    public static class BillingTotal
     {
 
         // Loops through the currentOrderList and adds each item's price to the subtotal and returns the subtotal
-        public double SubTotal(ImenuItem currentOrderList)
+        public static double SubTotal(List<Product> currentOrderList)
         {
-            double subtotal = 0.0d;
+            double subtotal = 0.0;
 
             foreach (var item in currentOrderList)
             {
@@ -21,14 +21,14 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         }
 
         // Returns the total sales tax of the subtotal when the subtotal and sales tax (as a decimal) are given
-        public double SalesTax(double subtotal, double salesTaxPercent)
+        public static double SalesTax(double subtotal, double salesTaxPercent)
         {
             double subtotalSalesTax = subtotal * salesTaxPercent;
 
             return subtotalSalesTax;
         }
 
-        public double GrandTotal(double subtotal, double subtotalSalesTax)
+        public static double GrandTotal(double subtotal, double subtotalSalesTax)
         {
             double grandTotal = subtotal + subtotalSalesTax;
 
