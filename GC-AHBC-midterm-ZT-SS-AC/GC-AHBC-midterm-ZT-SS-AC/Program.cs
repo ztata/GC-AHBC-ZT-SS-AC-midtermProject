@@ -293,11 +293,26 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 }                
                 goto TryAgain;
             PayByCheck:
-
+                /*
+                 * 
+                 * 
+                 * 
+                 * 
+                 * 
+                 * 
+                 * 
+                 */
                 goto TryAgain;
             PayByCard:
-
-
+            /*
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             */
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
                 Console.Write("Enter y to coninue or anything else to quit: ");
