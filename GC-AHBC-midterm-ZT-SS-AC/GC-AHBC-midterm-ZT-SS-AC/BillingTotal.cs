@@ -8,7 +8,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
     {
 
         // Loops through the currentOrderList and adds each item's price to the subtotal and returns the subtotal
-        public static double SubTotal(List<Products> currentOrderList)
+        public static double SubTotal(List<Product> currentOrderList)
         {
             double subtotal = 0.0;
 
