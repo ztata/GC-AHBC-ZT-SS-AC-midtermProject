@@ -19,4 +19,11 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         vanillaBeanScone,
         plainBagel
     }
+
+    public enum PaymentMethod
+    {
+        cash = 1,
+        check,
+        creditCard
+    }
 }
