@@ -16,7 +16,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
             bool runProgramAgain = true;
             string userInput = "";
-            int numberToOrder = -1;
+            int numberToOrder = -1; 
 
             do//repeats the program if the user chooses
             {
@@ -50,35 +50,41 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     Console.WriteLine("Please enter the number preceeding the item you would like to order: ");
                     userInput = Console.ReadLine();
                     int userChoice = -1;
-                    try //try catch makes sure input is a integer number. will repeat loop if it doesnt work
-                    {
-                        userChoice = int.Parse(userInput);
-                    }
-                    catch (FormatException)
-                    {
-                        Console.WriteLine("Sorry, that is not a valid input!");
-                        continue;
-                    }
 
-                    if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
-                    {
-                        Console.WriteLine("Sorry, your input needs to be between 1 and 12!");
-                        continue;
-                    }
-                    else
-                    {
-                        userMenuSelection = (Menu)userChoice;
-                    }
-
+                    //FIX THE LOOP AROUND THE TRY CATCH//
                     bool validOrderNumber = false;
                     while (validOrderNumber == false)
+                    {
+                        try //try catch makes sure input is a integer number. will repeat loop if it doesnt work
+                        {
+                            userChoice = int.Parse(userInput);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Sorry, that is not a valid input!");
+                            continue;
+                        }
+
+                        if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
+                        {
+                            Console.WriteLine("Sorry, your input needs to be between 1 and 12!");
+                            continue;
+                        }
+                        else
+                        {
+                            validOrderNumber = true;
+                        }
+                    }
+                    userMenuSelection = (Menu)userChoice;
+                    bool validOrderQuantity = false;
+                    while (validOrderQuantity == false)
                     {
                         Console.WriteLine("How many of these would you like to order?");
                         userInput = Console.ReadLine();
                         try
                         {
                             numberToOrder = int.Parse(userInput);
-                           
+
                         }
                         catch (FormatException)
                         {
@@ -91,7 +97,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         }
                         else
                         {
-                            validOrderNumber = true;
+                            validOrderQuantity = true;
                         }
                     }
 
@@ -183,17 +189,14 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     {
                         orderAnotherItem = false;
                     }
-
-
-
-
                 }
 
-                /*
-                 * 
-                 * INSERT LOGIC HERE TO TOTAL THE BILL, RECEIVE PAYMENT, ETC
-                 * 
-                 */
+
+            /*
+             * 
+             * INSERT LOGIC HERE TO TOTAL THE BILL, RECEIVE PAYMENT, ETC
+             * 
+             */
 
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
@@ -214,15 +217,6 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             Console.WriteLine("Thank you for shopping at Jitters Coffee House!");
             Console.WriteLine("Please press any key to continue: ");
             Console.ReadKey();
-
-
-
-
-
-
-
-
-
         }
     }
 }

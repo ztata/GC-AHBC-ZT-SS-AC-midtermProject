@@ -7,6 +7,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 {
     public static class FileHelper
     {
+        // Reads the file for the menu items
         public static List<MenuItem> BuildMenuList (string path)
         {
             List<MenuItem> productList = new List<MenuItem>();
@@ -16,7 +17,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 while ((lineText = reader.ReadLine()) != null)
                 {
                     string[] items = lineText.Split('|');
-                    if (items.Length != 3)
+                    if (items.Length != 4)
                     {
                         continue;
                     }
@@ -31,6 +32,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             return productList;
         }
 
+        // Adds a product to the file
         public static void AddProductToFile(string path, MenuItem product)
         {
             StreamWriter writer = new StreamWriter(path, true);
