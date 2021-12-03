@@ -19,12 +19,6 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             int numberToOrder = -1;
             int userChoice = -1;
 
-            /*
-             * 
-             * after instantiating product objects, add them to an array so when we go to add them in the switch case with the for loops
-             * it is easier to locate them?             * 
-             * 
-             */
 
             do//repeats the program if the user chooses
             {
@@ -59,21 +53,20 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     userInput = Console.ReadLine();
                     userChoice = -1;
 
-                    //FIX THE LOOP AROUND THE TRY CATCH//
                     bool validOrderNumber = false;
                     while (validOrderNumber == false)
                     {
-                        try //try catch makes sure input is a integer number. will repeat loop if it doesnt work
+                        bool validInt = ValidationMethods.ValidateIntInput(userInput);
+                        if (validInt == true)
                         {
                             userChoice = int.Parse(userInput);
                         }
-                        catch (FormatException)
+                        else if (validInt == false)
                         {
                             Console.WriteLine("Sorry, that is not a valid input!");
                             continue;
-                        }
-
-                        if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
+                        }           
+                        else if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
                         {
                             Console.WriteLine("Sorry, your input needs to be between 1 and 12!");
                             continue;
@@ -89,19 +82,20 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     {
                         Console.WriteLine("How many of these would you like to order?");
                         userInput = Console.ReadLine();
-                        try //catches format exceptions by attempting to parse
+                        bool validInt = ValidationMethods.ValidateIntInput(userInput);
+                        if (validInt == true)
                         {
                             numberToOrder = int.Parse(userInput);
-
                         }
-                        catch (FormatException)
+                        else if (validInt == false)
                         {
                             Console.WriteLine("Sorry, that is not a valid input!");
                             continue;
                         }
-                        if (numberToOrder < 1)
+                        else if (numberToOrder < 1) //makes sure it is a valid number for enum selection
                         {
                             Console.WriteLine("Sorry, you can't order less than 1 of an item!");
+                            continue;
                         }
                         else
                         {
@@ -115,73 +109,73 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         case Menu.caffeMocha:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* first item*/);
+                                currentOrderList.Add(productList[0]);
                             }
                             break;
                         case Menu.caffeAmericano:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* second item*/);
+                                currentOrderList.Add(productList[1]);
                             }
                             break;
                         case Menu.cappucino:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* third item*/);
+                                currentOrderList.Add(productList[2]);
                             }
                             break;
                         case Menu.caffeMisto:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* fourth item*/);
+                                currentOrderList.Add(productList[3]);
                             }
                             break;
                         case Menu.chaiTeaLatte:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* fifth item*/);
+                                currentOrderList.Add(productList[4]);
                             }
                             break;
                         case Menu.londonFogTeaLatte:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* sixth item*/);
+                                currentOrderList.Add(productList[5]);
                             }
                             break;
                         case Menu.matchaTeaLatte:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* seventh item*/);
+                                currentOrderList.Add(productList[6]);
                             }
                             break;
                         case Menu.earlGrey:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* eighth item*/);
+                                currentOrderList.Add(productList[7]);
                             }
                             break;
                         case Menu.cranberryScones:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* ninth item*/);
+                                currentOrderList.Add(productList[8]);
                             }
                             break;
                         case Menu.icedLemonLoaf:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* tenth item*/);
+                                currentOrderList.Add(productList[9]);
                             }
                             break;
                         case Menu.vanillaBeanScone:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* eleventh item*/);
+                                currentOrderList.Add(productList[10]);
                             }
                             break;
                         case Menu.plainBagel:
                             for (int i = 0; i < numberToOrder; i++)
                             {
-                                currentOrderList.Add(/* twelveth item*/);
+                                currentOrderList.Add(productList[11]);
                             }
                             break;
                     }
@@ -190,14 +184,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     Console.WriteLine("Would you like to order another item?");
                     Console.Write("Enter y to continue your order or anything else to proceed to checkout: ");
                     userInput = Console.ReadLine();
-                    if (userInput.Trim().ToLower() == "y")
-                    {
-                        orderAnotherItem = true;
-                    }
-                    else
-                    {
-                        orderAnotherItem = false;
-                    }
+                    orderAnotherItem = HelperMethods.TryAgain(userInput);
+                    
                 }
 
                 //variables to hold the various totals created using methods in BillingTotal class
@@ -209,7 +197,11 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
             /*
              * 
-             * INSERT LOGIC HERE TO TOTAL THE BILL, RECEIVE PAYMENT, ETC
+             * 
+             * 
+             * RECEIPT LOGIC 
+             * 
+             * 
              * 
              */
 
@@ -224,17 +216,17 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     Console.WriteLine($"{PaymentMethod.creditCard}). Credit Card ");
                     Console.WriteLine("Please enter the number preceeding your choice.");
                     userInput = Console.ReadLine();
-                    try //checks to see if input is an int 
+                    bool validInt = ValidationMethods.ValidateIntInput(userInput);
+                    if (validInt == true)
                     {
                         userChoice = int.Parse(userInput);
                     }
-                    catch (FormatException)
+                    else if (validInt == false)
                     {
                         Console.WriteLine("Sorry, that is not a valid input type!");
                         continue;
                     }
-
-                    if (userChoice < 1 || userChoice > 3)
+                    else if (userChoice < 1 || userChoice > 3)
                     {
                         Console.WriteLine("Sorry, your number has to be one of the 3 displayed above!");
                         continue;
@@ -267,19 +259,19 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 {
                     Console.WriteLine("How much are you providing for payment?");
                     userInput = Console.ReadLine();
-                    try //checks to see if the entered number is a double 
+                    bool validDouble = ValidationMethods.ValidateDoubleInput(userInput);
+                    if (validDouble == true)
                     {
                         amountTendered = double.Parse(userInput);
-                        validAmountTendered = true;
                     }
-                    catch (FormatException)
+                    else if (validDouble == false)
                     {
                         Console.WriteLine("Sorry, we only expect payment in USD!");
                         continue;
                     }
-
+ 
                     //uses make change method to return the amount of change
-                    double change = MakeChange(amountTendered, grandTotal);
+                    double change = HelperMethods.MakeChange(amountTendered, grandTotal);
                     if (change < 1) //checks to see if they provided enough to pay for the total 
                     {
                         Console.WriteLine("Sorry, we are going to need a little more than that!");
@@ -293,39 +285,68 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 }                
                 goto TryAgain;
             PayByCheck:
-                /*
-                 * 
-                 * 
-                 * 
-                 * 
-                 * 
-                 * 
-                 * 
-                 */
+                bool validCheckNumber = false;
+                while (validCheckNumber == false)
+                {
+                    Console.WriteLine("What is the four digit check number from the check you would like to pay with (numbers only please)?");
+                    userInput = Console.ReadLine();
+                    validCheckNumber = BillingRegexMethods.ValidateCheckNumber(userInput.Trim());
+                    if (validCheckNumber == false)
+                    {
+                        Console.WriteLine("Sorry, that is not a valid check number.");
+                        Console.WriteLine("Please re-enter a valid four didgit check number.");
+                    }
+                }
+                Console.WriteLine("Thank you for your payment, enjoy your purchases and come again!");
                 goto TryAgain;
             PayByCard:
-            /*
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             * 
-             */
+                bool validCardNumber = false;
+                bool validExpirationDate = false;
+                bool validCWCode = false;
+
+                while (validCardNumber == false)
+                {
+                    Console.WriteLine("Please enter the number on the card you would like to use in the following format(dashes included): XXXX-XXXX-XXXX-XXXX");
+                    userInput = Console.ReadLine();
+                    validCardNumber = BillingRegexMethods.ValidateCardNumber(userInput.Trim());
+                    if (validCardNumber == false)
+                    {
+                        Console.WriteLine("Sorry, that is not a valid card number.");
+                        Console.WriteLine("Please re-enter a valid card number.");
+                    }
+                }
+                Console.WriteLine("Thank you!");
+                while (validExpirationDate == false)
+                {
+                    Console.WriteLine("Please enter the expiration date on your card using the following format (slashes included): MM/YYYY");
+                    userInput = Console.ReadLine();
+                    validExpirationDate = BillingRegexMethods.ValidateExpirationDate(userInput.Trim());
+                    if (validExpirationDate == false)
+                    {
+                        Console.WriteLine("Sorry, that is not a valid expiration date.");
+                        Console.WriteLine("Please re-enter a valid date.");
+                    }
+                }
+                Console.WriteLine("Thank you, only more more piece of info is required.");
+                while (validCWCode == false)
+                {
+                    Console.WriteLine("Please enter the 3 digit CW code on your card: ");
+                    userInput = Console.ReadLine();
+                    validCWCode = BillingRegexMethods.ValidateCWCode(userInput.Trim());
+                    if (validCWCode == false)
+                    {
+                        Console.WriteLine("Sorry, that is not a valid CW code.");
+                        Console.WriteLine("Please re-enter a valid code.");
+                    }
+                }
+                Console.WriteLine("All set!");
+                Console.WriteLine("Thank you for your payment, enjoy your purchases and come again!");
+            
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
                 Console.Write("Enter y to coninue or anything else to quit: ");
                 userInput = Console.ReadLine();
-                if (userInput.Trim().ToLower() == "y")
-                {
-                    runProgramAgain = true;
-                }
-                else
-                {
-                    runProgramAgain = false;
-                }
-
+                runProgramAgain = HelperMethods.TryAgain(userInput);
             } while (runProgramAgain);
 
         Exit:
@@ -334,11 +355,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             Console.ReadKey();
         }
 
-        public static double MakeChange (double amountTendered, double totalPrice)
-        {
-            return amountTendered - totalPrice;
-        }
-
+        
         public static void PrintReceipt(double subtotal, double salesTax, double grandTotal, string PaymentMethod, List<Product> currentOrderList)
         {
             Console.WriteLine("****************Thank you for shopping at Jitters Coffee House****************");
