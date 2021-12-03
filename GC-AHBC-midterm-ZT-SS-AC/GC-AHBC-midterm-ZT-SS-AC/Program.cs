@@ -107,76 +107,40 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     switch (userMenuSelection)
                     {
                         case Menu.caffeMocha:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[0]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[0]);
                             break;
                         case Menu.caffeAmericano:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[1]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[1]);
                             break;
                         case Menu.cappucino:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[2]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[2]);
                             break;
                         case Menu.caffeMisto:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[3]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[3]);
                             break;
                         case Menu.chaiTeaLatte:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[4]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[4]);
                             break;
                         case Menu.londonFogTeaLatte:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[5]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[5]);
                             break;
                         case Menu.matchaTeaLatte:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[6]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[6]);
                             break;
                         case Menu.earlGrey:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[7]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[7]);
                             break;
                         case Menu.cranberryScones:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[8]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[8]);
                             break;
                         case Menu.icedLemonLoaf:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[9]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[9]);
                             break;
                         case Menu.vanillaBeanScone:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[10]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[10]);
                             break;
                         case Menu.plainBagel:
-                            for (int i = 0; i < numberToOrder; i++)
-                            {
-                                currentOrderList.Add(productList[11]);
-                            }
+                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[11]);
                             break;
                     }
                     
