@@ -92,7 +92,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                             Console.WriteLine("Sorry, that is not a valid input!");
                             continue;
                         }
-                        else if (userChoice < 1) //makes sure it is a valid number for enum selection
+                        else if (numberToOrder < 1) //makes sure it is a valid number for enum selection
                         {
                             Console.WriteLine("Sorry, you can't order less than 1 of an item!");
                             continue;
@@ -216,17 +216,17 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     Console.WriteLine($"{PaymentMethod.creditCard}). Credit Card ");
                     Console.WriteLine("Please enter the number preceeding your choice.");
                     userInput = Console.ReadLine();
-                    try //checks to see if input is an int 
+                    bool validInt = ValidationMethods.ValidateIntInput(userInput);
+                    if (validInt == true)
                     {
                         userChoice = int.Parse(userInput);
                     }
-                    catch (FormatException)
+                    else if (validInt == false)
                     {
                         Console.WriteLine("Sorry, that is not a valid input type!");
                         continue;
                     }
-
-                    if (userChoice < 1 || userChoice > 3)
+                    else if (userChoice < 1 || userChoice > 3)
                     {
                         Console.WriteLine("Sorry, your number has to be one of the 3 displayed above!");
                         continue;
@@ -259,17 +259,17 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 {
                     Console.WriteLine("How much are you providing for payment?");
                     userInput = Console.ReadLine();
-                    try //checks to see if the entered number is a double 
+                    bool validDouble = ValidationMethods.ValidateDoubleInput(userInput);
+                    if (validDouble == true)
                     {
                         amountTendered = double.Parse(userInput);
-                        validAmountTendered = true;
                     }
-                    catch (FormatException)
+                    else if (validDouble == false)
                     {
                         Console.WriteLine("Sorry, we only expect payment in USD!");
                         continue;
                     }
-
+ 
                     //uses make change method to return the amount of change
                     double change = HelperMethods.MakeChange(amountTendered, grandTotal);
                     if (change < 1) //checks to see if they provided enough to pay for the total 
@@ -341,19 +341,12 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 }
                 Console.WriteLine("All set!");
                 Console.WriteLine("Thank you for your payment, enjoy your purchases and come again!");
+            
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
                 Console.Write("Enter y to coninue or anything else to quit: ");
                 userInput = Console.ReadLine();
-                if (userInput.Trim().ToLower() == "y")
-                {
-                    runProgramAgain = true;
-                }
-                else
-                {
-                    runProgramAgain = false;
-                }
-
+                runProgramAgain = HelperMethods.TryAgain(userInput);
             } while (runProgramAgain);
 
         Exit:
