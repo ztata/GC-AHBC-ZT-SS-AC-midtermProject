@@ -19,12 +19,6 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             int numberToOrder = -1;
             int userChoice = -1;
 
-            /*
-             * 
-             * after instantiating product objects, add them to an array so when we go to add them in the switch case with the for loops
-             * it is easier to locate them?             * 
-             * 
-             */
 
             do//repeats the program if the user chooses
             {
@@ -59,21 +53,20 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     userInput = Console.ReadLine();
                     userChoice = -1;
 
-                    //FIX THE LOOP AROUND THE TRY CATCH//
                     bool validOrderNumber = false;
                     while (validOrderNumber == false)
                     {
-                        try //try catch makes sure input is a integer number. will repeat loop if it doesnt work
+                        bool validInt = ValidationMethods.ValidateIntInput(userInput);
+                        if (validInt == true)
                         {
                             userChoice = int.Parse(userInput);
                         }
-                        catch (FormatException)
+                        else if (validInt == false)
                         {
                             Console.WriteLine("Sorry, that is not a valid input!");
                             continue;
-                        }
-
-                        if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
+                        }           
+                        else if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
                         {
                             Console.WriteLine("Sorry, your input needs to be between 1 and 12!");
                             continue;
@@ -89,19 +82,20 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     {
                         Console.WriteLine("How many of these would you like to order?");
                         userInput = Console.ReadLine();
-                        try //catches format exceptions by attempting to parse
+                        bool validInt = ValidationMethods.ValidateIntInput(userInput);
+                        if (validInt == true)
                         {
                             numberToOrder = int.Parse(userInput);
-
                         }
-                        catch (FormatException)
+                        else if (validInt == false)
                         {
                             Console.WriteLine("Sorry, that is not a valid input!");
                             continue;
                         }
-                        if (numberToOrder < 1)
+                        else if (userChoice < 1) //makes sure it is a valid number for enum selection
                         {
                             Console.WriteLine("Sorry, you can't order less than 1 of an item!");
+                            continue;
                         }
                         else
                         {
@@ -190,14 +184,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     Console.WriteLine("Would you like to order another item?");
                     Console.Write("Enter y to continue your order or anything else to proceed to checkout: ");
                     userInput = Console.ReadLine();
-                    if (userInput.Trim().ToLower() == "y")
-                    {
-                        orderAnotherItem = true;
-                    }
-                    else
-                    {
-                        orderAnotherItem = false;
-                    }
+                    orderAnotherItem = HelperMethods.TryAgain(userInput);
+                    
                 }
 
                 //variables to hold the various totals created using methods in BillingTotal class
@@ -209,7 +197,11 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
             /*
              * 
-             * INSERT LOGIC HERE TO TOTAL THE BILL, RECEIVE PAYMENT, ETC
+             * 
+             * 
+             * RECEIPT LOGIC 
+             * 
+             * 
              * 
              */
 
@@ -279,7 +271,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     }
 
                     //uses make change method to return the amount of change
-                    double change = MakeChange(amountTendered, grandTotal);
+                    double change = HelperMethods.MakeChange(amountTendered, grandTotal);
                     if (change < 1) //checks to see if they provided enough to pay for the total 
                     {
                         Console.WriteLine("Sorry, we are going to need a little more than that!");
@@ -370,11 +362,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             Console.ReadKey();
         }
 
-        public static double MakeChange (double amountTendered, double totalPrice)
-        {
-            return amountTendered - totalPrice;
-        }
-
+        
         public static void PrintReceipt(double subtotal, double salesTax, double grandTotal, string PaymentMethod, List<Product> currentOrderList)
         {
             Console.WriteLine("****************Thank you for shopping at Jitters Coffee House****************");
