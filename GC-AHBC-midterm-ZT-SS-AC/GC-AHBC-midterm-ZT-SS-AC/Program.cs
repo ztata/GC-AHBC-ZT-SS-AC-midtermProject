@@ -10,7 +10,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         {
             Console.Title = "Full Stack After Hours Bootcamp Midterm Project";
 
-            string addressPath = @"C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\MenuItems.txt";
+            string addressPath = @"C:\Users\zacha\source\repos\midtermProject\GC-AHBC-midterm-ZT-SS-AC\MenuItems.txt";
+            //string addressPath = @"C:\Users\schan\Documents\Web Development\Education\Grand Circus\Full Stack C# .NET Bootcamp\MidTermProject\GC-AHBC-midterm-ZT-SS-AC\MenuItems.txt";
 
             Product[] productList =  FileHelper.BuildMenuList(addressPath);
 
@@ -18,44 +19,41 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             string userInput = "";
             int numberToOrder = -1;
             int userChoice = -1;
+            //list of items the patron has ordered 
+            List<Product> currentOrderList = new List<Product>();
 
 
             do//repeats the program if the user chooses
             {
-                Console.WriteLine("Hello and welcome to Jitters Coffee House!");
-            Menu:
-                //displays the menu and prices for items available at the shop 
-                Console.WriteLine("Please see the menu below: ");
-                Console.WriteLine("-------------------------------");
-                Console.WriteLine(Menu.caffeMocha + $" {productList[0].Name} -- ${productList[0].Price}");
-                Console.WriteLine($"{Menu.caffeAmericano}). {productList[1].Name} -- ${productList[1].Price}");
-                Console.WriteLine($"{Menu.cappucino}). {productList[2].Name} -- ${productList[2].Price}");
-                Console.WriteLine($"{Menu.caffeMisto}). {productList[3].Name} -- ${productList[3].Price}");
-                Console.WriteLine($"{Menu.chaiTeaLatte}). {productList[4].Name} -- ${productList[4].Price}");
-                Console.WriteLine($"{Menu.londonFogTeaLatte}). {productList[5].Name} -- ${productList[5].Price}");
-                Console.WriteLine($"{Menu.matchaTeaLatte}). {productList[6].Name} -- ${productList[6].Price}");
-                Console.WriteLine($"{Menu.earlGrey}). {productList[7].Name} -- ${productList[7].Price}");
-                Console.WriteLine($"{Menu.cranberryScones}). {productList[8].Name} -- ${productList[8].Price}");
-                Console.WriteLine($"{Menu.icedLemonLoaf}). {productList[9].Name} -- ${productList[9].Price}");
-                Console.WriteLine($"{Menu.vanillaBeanScone}). {productList[10].Name} -- ${productList[10].Price}");
-                Console.WriteLine($"{Menu.plainBagel}). {productList[11].Name} -- ${productList[11].Price}");
-
-                //list of items the patron has ordered 
-                List<Product> currentOrderList = new List<Product>();
-
+                Console.WriteLine("Hello and welcome to Jitters Coffee House!");                        
 
                 //bool value that allows them to loop and order another item 
                 bool orderAnotherItem = true;
                 Menu userMenuSelection;
                 while (orderAnotherItem) //while loop repeats while they want to keep ordering 
                 {
-                    Console.WriteLine("Please enter the number preceeding the item you would like to order: ");
-                    userInput = Console.ReadLine();
-                    userChoice = -1;
-
+                Menu:
+                //displays the menu and prices for items available at the shop 
+                Console.WriteLine("Please see the menu below: ");
+                Console.WriteLine("-------------------------------");
+                Console.WriteLine($"{(int)Menu.caffeMocha}.) {productList[0].Name} -- ${productList[0].Price}");
+                Console.WriteLine($"{(int)Menu.caffeAmericano}.) {productList[1].Name} -- ${productList[1].Price}");
+                Console.WriteLine($"{(int)Menu.cappucino}.) {productList[2].Name} -- ${productList[2].Price}");
+                Console.WriteLine($"{(int)Menu.caffeMisto}.) {productList[3].Name} -- ${productList[3].Price}");
+                Console.WriteLine($"{(int)Menu.chaiTeaLatte}.) {productList[4].Name} -- ${productList[4].Price}");
+                Console.WriteLine($"{(int)Menu.londonFogTeaLatte}.) {productList[5].Name} -- ${productList[5].Price}");
+                Console.WriteLine($"{(int)Menu.matchaTeaLatte}.) {productList[6].Name} -- ${productList[6].Price}");
+                Console.WriteLine($"{(int)Menu.earlGrey}.) {productList[7].Name} -- ${productList[7].Price}");
+                Console.WriteLine($"{(int)Menu.cranberryScones}.) {productList[8].Name} -- ${productList[8].Price}");
+                Console.WriteLine($"{(int)Menu.icedLemonLoaf}.) {productList[9].Name} -- ${productList[9].Price}");
+                Console.WriteLine($"{(int)Menu.vanillaBeanScone}.) {productList[10].Name} -- ${productList[10].Price}");
+                Console.WriteLine($"{(int)Menu.plainBagel}.) {productList[11].Name} -- ${productList[11].Price}");
+                                   
                     bool validOrderNumber = false;
-                    while (validOrderNumber == false)
+                    do
                     {
+                        Console.WriteLine("Please enter the number preceeding the item you would like to order: ");
+                        userInput = Console.ReadLine();
                         bool validInt = ValidationMethods.ValidateIntInput(userInput);
                         if (validInt == true)
                         {
@@ -65,18 +63,18 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         {
                             Console.WriteLine("Sorry, that is not a valid input!");
                             continue;
-                        }   
-                        
+                        }
+
                         if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
                         {
                             Console.WriteLine("Sorry, your input needs to be between 1 and 12!");
-                            continue;
+                            validOrderNumber = false;
                         }
                         else
                         {
                             validOrderNumber = true;
                         }
-                    }
+                    } while (validOrderNumber == false);
                     userMenuSelection = (Menu)userChoice; //casts user choice as an enum 
                     bool validOrderQuantity = false;
                     while (validOrderQuantity == false) //will keep looping until we receive a valid quantity of items to be ordered
@@ -160,7 +158,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 double salesTax = BillingTotal.SalesTax(subtotal, miSalesTax);
                 double grandTotal = BillingTotal.GrandTotal(subtotal, salesTax);
 
-                Console.WriteLine($"Your total today comes to {grandTotal}.");
+                Console.WriteLine($"Your total today comes to ${grandTotal}.");
 
             PaymentMethod:
                 userChoice = -1;
@@ -168,9 +166,9 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 while (validPaymentTypeChoice == false) //will continue looping until they give a valid input for their payment type
                 {
                     Console.WriteLine("How would you like to pay for todays order?");
-                    Console.WriteLine($"{PaymentMethod.cash}). Cash");
-                    Console.WriteLine($"{PaymentMethod.check}). Check");
-                    Console.WriteLine($"{PaymentMethod.creditCard}). Credit Card ");
+                    Console.WriteLine($"{(int)PaymentMethod.cash}.) {PaymentMethod.cash}");
+                    Console.WriteLine($"{(int)PaymentMethod.check}.) {PaymentMethod.check}");
+                    Console.WriteLine($"{(int)PaymentMethod.creditCard}.) {PaymentMethod.creditCard} ");
                     Console.WriteLine("Please enter the number preceeding your choice.");
                     userInput = Console.ReadLine();
                     bool validInt = ValidationMethods.ValidateIntInput(userInput);
@@ -241,7 +239,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         validAmountTendered = true;
                     }
                 }                
-                goto TryAgain;
+                goto Receipt;
             PayByCheck:
                 bool validCheckNumber = false;
                 while (validCheckNumber == false)
@@ -256,7 +254,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     }
                 }
                 Console.WriteLine("Thank you for your payment, enjoy your purchases and come again!");
-                goto TryAgain;
+                goto Receipt;
             PayByCard:
                 bool validCardNumber = false;
                 bool validExpirationDate = false;
@@ -299,13 +297,13 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 }
                 Console.WriteLine("All set!");
                 Console.WriteLine("Thank you for your payment, enjoy your purchases and come again!");
-
+                Receipt:
                 Console.WriteLine("Complete Order Details:");
                 foreach (var product in currentOrderList)
                     {
-                        Console.WriteLine($"{product.Name} -- {product.Price}"); 
+                        Console.WriteLine($"{product.Name} -- ${product.Price}"); 
                     }
-                Console.WriteLine($"SUBTOTAL: ${subtotal}\nTAX: {salesTax}\nGRAND TOTAL: ${grandTotal}\nPAYMENT METHOD: {paymentChoice}");
+                Console.WriteLine($"SUBTOTAL: ${subtotal}\nTAX: ${salesTax}\nGRAND TOTAL: ${grandTotal}\nPAYMENT METHOD: {paymentChoice}");
 
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
