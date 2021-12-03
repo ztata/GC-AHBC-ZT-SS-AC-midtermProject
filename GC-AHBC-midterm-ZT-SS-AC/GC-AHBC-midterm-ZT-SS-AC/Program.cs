@@ -27,7 +27,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 //displays the menu and prices for items available at the shop 
                 Console.WriteLine("Please see the menu below: ");
                 Console.WriteLine("-------------------------------");
-                Console.WriteLine($"{Menu.caffeMocha}). {productList[0].Name} -- ${productList[0].Price}");
+                Console.WriteLine(Menu.caffeMocha + $" {productList[0].Name} -- ${productList[0].Price}");
                 Console.WriteLine($"{Menu.caffeAmericano}). {productList[1].Name} -- ${productList[1].Price}");
                 Console.WriteLine($"{Menu.cappucino}). {productList[2].Name} -- ${productList[2].Price}");
                 Console.WriteLine($"{Menu.caffeMisto}). {productList[3].Name} -- ${productList[3].Price}");
