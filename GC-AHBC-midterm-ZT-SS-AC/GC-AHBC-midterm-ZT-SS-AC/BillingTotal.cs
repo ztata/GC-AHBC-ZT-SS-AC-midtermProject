@@ -14,7 +14,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
             foreach (var item in currentOrderList)
             {
-                subtotal = subtotal + item.Price;
+                subtotal = Math.Round(subtotal + item.Price, 2, MidpointRounding.AwayFromZero);
             }
 
             return subtotal;
@@ -23,7 +23,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         // Returns the total sales tax of the subtotal when the subtotal and sales tax (as a decimal) are given
         public static double SalesTax(double subtotal, double salesTaxPercent)
         {
-            double subtotalSalesTax = subtotal * salesTaxPercent;
+            double subtotalSalesTax = Math.Round(subtotal * salesTaxPercent, 2, MidpointRounding.AwayFromZero);
 
             return subtotalSalesTax;
         }
@@ -31,7 +31,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         // Returns the grand total which is the subtotal plus the total sales tax
         public static double GrandTotal(double subtotal, double subtotalSalesTax)
         {
-            double grandTotal = subtotal + subtotalSalesTax;
+            double grandTotal = Math.Round(subtotal + subtotalSalesTax, 2, MidpointRounding.AwayFromZero);
 
             return grandTotal;
         }
