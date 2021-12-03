@@ -158,6 +158,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 double salesTax = BillingTotal.SalesTax(subtotal, miSalesTax);
                 double grandTotal = BillingTotal.GrandTotal(subtotal, salesTax);
 
+                Console.WriteLine($"Your total today comes to {grandTotal}.");
+
             PaymentMethod:
                 userChoice = -1;
                 bool validPaymentTypeChoice = false;
