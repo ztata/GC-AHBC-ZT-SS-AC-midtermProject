@@ -305,7 +305,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     {
                         Console.WriteLine($"{product.Name} -- {product.Price}"); 
                     }
-                Console.WriteLine($"SUBTOTAL: ${subtotal}\nTAX: ${salesTax}\nGRAND TOTAL: ${grandTotal}\n PAYMENT METHOD: {paymentChoice}");
+                Console.WriteLine($"SUBTOTAL: ${subtotal}\nTAX: {salesTax}\nGRAND TOTAL: ${grandTotal}\nPAYMENT METHOD: {paymentChoice}");
 
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
