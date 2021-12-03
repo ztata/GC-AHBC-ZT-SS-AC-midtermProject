@@ -22,5 +22,14 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 return false;
             }
         }
+
+        public static List<Product> AddItemToOrder (int numberToOrder, List<Product> currentOrderList, Product product)
+        {
+            for (int i = 0; i < numberToOrder; i++)
+            {
+                currentOrderList.Add(product);
+            }
+            return currentOrderList;
+        }
     }
 }
