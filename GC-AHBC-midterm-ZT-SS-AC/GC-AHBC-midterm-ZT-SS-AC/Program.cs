@@ -33,18 +33,18 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 //displays the menu and prices for items available at the shop 
                 Console.WriteLine("Please see the menu below: ");
                 Console.WriteLine("-------------------------------");
-                Console.WriteLine($"{Menu.caffeMocha}). Caffe Mocha -- $4.95");
-                Console.WriteLine($"{Menu.caffeAmericano}). Caffe Americano -- $3.95");
-                Console.WriteLine($"{Menu.cappucino}). Cappucino -- $5.95");
-                Console.WriteLine($"{Menu.caffeMisto}). Caffe Misto -- $2.95");
-                Console.WriteLine($"{Menu.chaiTeaLatte}). Chai Tea Latte -- $3.95");
-                Console.WriteLine($"{Menu.londonFogTeaLatte}). London Fog Tea Latte -- $2.95");
-                Console.WriteLine($"{Menu.matchaTeaLatte}). Matcha Tea Latte -- $4.95");
-                Console.WriteLine($"{Menu.earlGrey}). Earl Grey -- $2.95");
-                Console.WriteLine($"{Menu.cranberryScones}). Cranberry Scone -- $6.25");
-                Console.WriteLine($"{Menu.icedLemonLoaf}). Iced Lemon Loaf -- $5.95");
-                Console.WriteLine($"{Menu.vanillaBeanScone}). Vanilla Bean Scone -- $2.25");
-                Console.WriteLine($"{Menu.plainBagel}). Plain Bagel -- $2.95");
+                Console.WriteLine($"{Menu.caffeMocha}). {productList[0].Name} -- ${productList[0].Price}");
+                Console.WriteLine($"{Menu.caffeAmericano}). {productList[1].Name} -- ${productList[1].Price}");
+                Console.WriteLine($"{Menu.cappucino}). {productList[2].Name} -- ${productList[2].Price}");
+                Console.WriteLine($"{Menu.caffeMisto}). {productList[3].Name} -- ${productList[3].Price}");
+                Console.WriteLine($"{Menu.chaiTeaLatte}). {productList[4].Name} -- ${productList[4].Price}");
+                Console.WriteLine($"{Menu.londonFogTeaLatte}). {productList[5].Name} -- ${productList[5].Price}");
+                Console.WriteLine($"{Menu.matchaTeaLatte}). {productList[6].Name} -- ${productList[6].Price}");
+                Console.WriteLine($"{Menu.earlGrey}). {productList[7].Name} -- ${productList[7].Price}");
+                Console.WriteLine($"{Menu.cranberryScones}). {productList[8].Name} -- ${productList[8].Price}");
+                Console.WriteLine($"{Menu.icedLemonLoaf}). {productList[9].Name} -- ${productList[9].Price}");
+                Console.WriteLine($"{Menu.vanillaBeanScone}). {productList[10].Name} -- ${productList[10].Price}");
+                Console.WriteLine($"{Menu.plainBagel}). {productList[11].Name} -- ${productList[11].Price}");
 
                 //list of items the patron has ordered 
                 List<Product> currentOrderList = new List<Product>();

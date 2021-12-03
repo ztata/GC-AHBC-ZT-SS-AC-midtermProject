@@ -28,6 +28,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             return subtotalSalesTax;
         }
 
+        // Returns the grand total which is the subtotal plus the total sales tax
         public static double GrandTotal(double subtotal, double subtotalSalesTax)
         {
             double grandTotal = subtotal + subtotalSalesTax;

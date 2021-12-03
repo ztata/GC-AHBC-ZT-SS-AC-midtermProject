@@ -1,4 +1,3 @@
-Name|Price|Category|Description
 Caffe Mocha|4.95|Hot Coffee|Milk, Brewed Espresso, Mocha Sauce, Whipped Cream
 Caffe Americano|3.95|Hot Coffee|Water, Brewed Espresso
 Cappuccino|5.95|Hot Coffee|Milk, Brewed Espresso

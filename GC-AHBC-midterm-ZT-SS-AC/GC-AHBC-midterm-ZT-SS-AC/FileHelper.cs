@@ -22,6 +22,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     {
                         continue;
                     }
+                    // Creates a new Product and stores each element into its correct variable
                     Product product = new Product();
                     product.Name = items[0];
                     product.Price = double.Parse(items[1]);
@@ -34,7 +35,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             return productArray;
         }
 
-        // Adds a product to the file
+        // Adds a product to the file - This will come later but we'll have to change the Array to a List
         public static void AddProductToFile(string path, Product product)
         {
             StreamWriter writer = new StreamWriter(path, true);
