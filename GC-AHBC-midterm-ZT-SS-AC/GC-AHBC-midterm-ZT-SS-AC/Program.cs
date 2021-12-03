@@ -296,11 +296,11 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 Console.WriteLine("Thank you for your payment, enjoy your purchases and come again!");
 
                 Console.WriteLine("Complete Order Details:");
-                foreach (Product in currentOrderList)
+                foreach (var product in currentOrderList)
                     {
-                        Console.WriteLine($"{numberToOrder} {userMenuSelection}"); 
+                        Console.WriteLine($"{product.Name} -- {product.Price}"); 
                     }
-                Console.WriteLine($"SUBTOTAL: ${subtotal}" \n$"TAX: ${salesTax}" \n$"GRAND TOTAL: ${grandTotal}";\n$"PAYMENT METHOD: {PaymentMethod}";
+                Console.WriteLine($"SUBTOTAL: ${subtotal}\nTAX: {salesTax}\nGRAND TOTAL: ${grandTotal}\nPAYMENT METHOD: {paymentChoice}");
 
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
