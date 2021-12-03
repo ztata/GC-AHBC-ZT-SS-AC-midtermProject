@@ -61,12 +61,13 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         {
                             userChoice = int.Parse(userInput);
                         }
-                        else if (validInt == false)
+                        else
                         {
                             Console.WriteLine("Sorry, that is not a valid input!");
                             continue;
-                        }           
-                        else if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
+                        }   
+                        
+                        if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
                         {
                             Console.WriteLine("Sorry, your input needs to be between 1 and 12!");
                             continue;
@@ -87,12 +88,13 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         {
                             numberToOrder = int.Parse(userInput);
                         }
-                        else if (validInt == false)
+                        else
                         {
                             Console.WriteLine("Sorry, that is not a valid input!");
                             continue;
                         }
-                        else if (numberToOrder < 1) //makes sure it is a valid number for enum selection
+
+                        if (numberToOrder < 1) //makes sure it is a valid number for enum selection
                         {
                             Console.WriteLine("Sorry, you can't order less than 1 of an item!");
                             continue;
@@ -176,12 +178,13 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     {
                         userChoice = int.Parse(userInput);
                     }
-                    else if (validInt == false)
+                    else
                     {
                         Console.WriteLine("Sorry, that is not a valid input type!");
                         continue;
                     }
-                    else if (userChoice < 1 || userChoice > 3)
+
+                    if (userChoice < 1 || userChoice > 3)
                     {
                         Console.WriteLine("Sorry, your number has to be one of the 3 displayed above!");
                         continue;
@@ -219,7 +222,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     {
                         amountTendered = double.Parse(userInput);
                     }
-                    else if (validDouble == false)
+                    else
                     {
                         Console.WriteLine("Sorry, we only expect payment in USD!");
                         continue;
