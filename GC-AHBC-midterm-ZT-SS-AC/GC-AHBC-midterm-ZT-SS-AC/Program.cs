@@ -194,17 +194,6 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 double salesTax = BillingTotal.SalesTax(subtotal, miSalesTax);
                 double grandTotal = BillingTotal.GrandTotal(subtotal, salesTax);
 
-
-            /*
-             * 
-             * 
-             * 
-             * RECEIPT LOGIC 
-             * 
-             * 
-             * 
-             */
-
             PaymentMethod:
                 userChoice = -1;
                 bool validPaymentTypeChoice = false;
@@ -341,7 +330,14 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 }
                 Console.WriteLine("All set!");
                 Console.WriteLine("Thank you for your payment, enjoy your purchases and come again!");
-            
+
+                Console.WriteLine("Complete Order Details:");
+                foreach (Product in currentOrderList)
+                    {
+                        Console.WriteLine($"{numberToOrder} {userMenuSelection}"); 
+                    }
+                Console.WriteLine($"SUBTOTAL: ${subtotal}" \n$"TAX: ${salesTax}" \n$"GRAND TOTAL: ${grandTotal}";\n$"PAYMENT METHOD: {PaymentMethod}";
+
             TryAgain:
                 Console.WriteLine("Would you like to repeat the program?");
                 Console.Write("Enter y to coninue or anything else to quit: ");
@@ -353,21 +349,6 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             Console.WriteLine("Thank you for shopping at Jitters Coffee House!");
             Console.WriteLine("Please press any key to continue: ");
             Console.ReadKey();
-        }
-
-        
-        public static void PrintReceipt(double subtotal, double salesTax, double grandTotal, string PaymentMethod, List<Product> currentOrderList)
-        {
-            Console.WriteLine("****************Thank you for shopping at Jitters Coffee House****************");
-            foreach (Product x in currentOrderList)
-            {
-                Console.WriteLine($"{Quantity} {userMenuSelection}"); //I want this to display a line for each item but I am not sure it this is correct...
-            }
-            Console.WriteLine($"SUBTOTAL: {subtotal}");
-            Console.WriteLine($"TAX: {salesTax}";
-            Console.WriteLine($"GRAND TOTAL: {grandTotal}";
-            Console.WriteLine($"PAYMENT METHOD: {PaymentMethod}";
-            Console.WriteLine("***************Can't wait to see you again soon!***************");
         }
     }
 }
