@@ -236,7 +236,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
  
                     //uses make change method to return the amount of change
                     double change = HelperMethods.MakeChange(amountTendered, grandTotal);
-                    if (change < 1) //checks to see if they provided enough to pay for the total 
+                    if (change < 0) //checks to see if they provided enough to pay for the total 
                     {
                         Console.WriteLine("Sorry, we are going to need a little more than that!");
                         continue;
@@ -258,7 +258,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     if (validCheckNumber == false)
                     {
                         Console.WriteLine("Sorry, that is not a valid check number.");
-                        Console.WriteLine("Please re-enter a valid four didgit check number.");
+                        Console.WriteLine("Please re-enter a valid four digit check number.");
                     }
                 }
                 Console.WriteLine("Thank you for your payment, enjoy your purchases and come again!");
