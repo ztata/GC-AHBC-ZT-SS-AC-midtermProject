@@ -10,8 +10,14 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         // Loops through the currentOrderList and adds each item's price to the subtotal and returns the subtotal
         public static double SubTotal(List<Product> currentOrderList)
         {
+            // Throw an exception if the currentOrderList is empty
+            if (currentOrderList.Count == 0)
+            {
+                throw new ArgumentNullException();
+            }
             double subtotal = 0.0;
 
+            // Add the price of each item in the current order list to the subtotal
             foreach (var item in currentOrderList)
             {
                 subtotal = Math.Round(subtotal + item.Price, 2, MidpointRounding.AwayFromZero);
