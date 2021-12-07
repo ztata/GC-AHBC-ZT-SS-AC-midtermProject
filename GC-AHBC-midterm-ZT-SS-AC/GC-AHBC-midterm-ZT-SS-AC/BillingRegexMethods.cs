@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace GC_AHBC_midterm_ZT_SS_AC
 {
@@ -25,11 +26,16 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
         public static bool ValidateExpirationDate(string expirationDate)
         {
-            //this will not catch all bad months 
-            string pattern = @"^[0-1][0-9]\/[2][0][2][1-9]$";
-            Regex regex = new Regex(pattern);
-            bool validExpirationDate = regex.IsMatch(expirationDate);
-            return validExpirationDate;
+            DateTime userDate;
+            bool validDate = DateTime.TryParseExact(expirationDate, "MM/yyyy", new CultureInfo("en-us"), DateTimeStyles.None, out userDate);
+            if (validDate == true && userDate > DateTime.Now)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public static bool ValidateCWCode(string cwCode)
