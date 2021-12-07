@@ -12,6 +12,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC.Tests.HelperMethodsTests
         [InlineData(500,100, 400)]
         [InlineData(50, 25, 25)]
         [InlineData(0, 0, 0)]
+        [InlineData(-10, -10, 0)]
         public static void ProvideValidDoubleAndPrice_ReturnDifferenceOfTheTwo(double amountTendered, double totalPrice, double expectedValue)
         {
             //arrange
@@ -21,15 +22,6 @@ namespace GC_AHBC_midterm_ZT_SS_AC.Tests.HelperMethodsTests
             //assert
             Assert.Equal(expectedValue, difference);
         }
-
-
-
-
-
-
-
-
-
     }
 }
 
