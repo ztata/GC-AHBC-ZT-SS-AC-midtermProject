@@ -234,7 +234,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     }
                     else
                     {
-                        Console.WriteLine("Thanks -- enjoy your purchases and come again!");
+                        Console.WriteLine($"Thanks! Your change comes to ${change} today.");
+                        Console.WriteLine("Enjoy your purchases and come again!");
                         validAmountTendered = true;
                     }
                 }                
