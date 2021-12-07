@@ -22,8 +22,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
     public enum PaymentMethod
     {
-        cash = 1,
-        check,
-        creditCard
+        Cash = 1,
+        Check,
+        Card
     }
 }

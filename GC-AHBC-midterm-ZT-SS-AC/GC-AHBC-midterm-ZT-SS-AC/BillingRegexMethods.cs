@@ -28,9 +28,9 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         {
             DateTime userDate;
             bool validDate = DateTime.TryParseExact(expirationDate, "MM/yyyy", new CultureInfo("en-us"), DateTimeStyles.None, out userDate);
-            if (validDate == true && userDate > DateTime.Now)
+            if (validDate == true && userDate > DateTime.Today)
             {
-                return true;
+                    return true;    
             }
             else
             {
