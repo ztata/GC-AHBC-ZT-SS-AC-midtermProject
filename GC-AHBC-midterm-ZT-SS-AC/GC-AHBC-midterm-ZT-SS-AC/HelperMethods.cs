@@ -13,18 +13,30 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
         public static bool TryAgain(string userInput)
         {
-            if (userInput.Trim().ToLower() == "y")
+            try
             {
-                return true;
+                if (userInput.Trim().ToLower() == "y")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (NullReferenceException)
             {
+
                 return false;
             }
         }
 
-        public static List<Product> AddItemToOrder (int numberToOrder, List<Product> currentOrderList, Product product)
+        public static List<Product> AddItemToOrder(int numberToOrder, List<Product> currentOrderList, Product product)
         {
+            if (numberToOrder < 1)
+            {
+                throw new ArgumentException("numberToOrder has to be one or greater for this method");
+            }
             for (int i = 0; i < numberToOrder; i++)
             {
                 currentOrderList.Add(product);
