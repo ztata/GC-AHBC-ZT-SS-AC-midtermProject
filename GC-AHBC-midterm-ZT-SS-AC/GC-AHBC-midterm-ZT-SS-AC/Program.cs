@@ -14,12 +14,13 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
             string addressPath = @$"{Environment.CurrentDirectory}\MenuItems.txt";
 
-            Product[] productList = FileHelper.BuildMenuList(addressPath);
+            List<Product> productList = FileHelper.BuildMenuList(addressPath);
 
             bool runProgramAgain = true;
             string userInput = "";
             int numberToOrder = -1;
             int userChoice = -1;
+            string userType = "";
             //list of items the patron has ordered 
             List<Product> currentOrderList = new List<Product>();
 
@@ -29,34 +30,89 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 Console.Clear();
                 Console.WriteLine("Hello and welcome to Jitters Coffee House!");
 
+                bool validUserType = false;
+                do
+                {
+                    Console.Write("Are you an employee or are a customer? ");
+                    userInput = Console.ReadLine();
+                    if (userInput.ToLower().Trim() == "employee" || userInput.ToLower().Trim() == "customer")
+                    {
+                        userType = userInput;
+                        validUserType = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, that is not a valid input! give either 'employee' or 'customer'.");
+                        continue;
+                    }
+                } while (validUserType == false);
+
                 //bool value that allows them to loop and order another item 
                 bool orderAnotherItem = true;
                 Menu userMenuSelection;
                 while (orderAnotherItem) //while loop repeats while they want to keep ordering 
                 {
+                    if (userType.ToLower().Trim() == "customer")
+                    {
+                        goto Menu;
+                    }
+                    else
+                    {
+                        Console.Write("Would you like to add a product to the menu (y/n)? ");
+                        userInput = Console.ReadLine();
+                        switch (userInput.ToLower().Trim())
+                        {
+                            case "n":
+                                Console.WriteLine("Ok. Have a nice day.");
+                                goto EmployeeExit;
+                            case "y":
+                                Product product = new Product();
+                                Console.Write("Product name: ");
+                                product.Name = Console.ReadLine().Trim();
+                                bool validDouble = false;
+                                do
+                                {
+                                    Console.Write("Product price: ");
+                                    userInput = Console.ReadLine();
+                                    validDouble = ValidationMethods.ValidateDoubleInput(userInput);
+                                    if (validDouble == true)
+                                    {
+                                        product.Price = double.Parse(userInput);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Sorry, that is not a valid input! Please enter a decimal.");
+                                    }
+                                } while (validDouble == false);
+                                Console.Write("Product category: ");
+                                product.Category = Console.ReadLine().Trim();
+                                Console.Write("Product description: ");
+                                product.Description = Console.ReadLine().Trim();
+
+                                FileHelper.AddProductToFile(addressPath, product);
+
+
+                                break;
+                            default:
+                                Console.WriteLine("Please enter either 'y' or 'n'.");
+                                continue;
+                        }
+                    }
 
                 Menu:
                     //displays the menu and prices for items available at the shop 
                     Console.WriteLine("Please see the menu below: ");
                     Console.WriteLine("-------------------------------");
-                    Console.WriteLine($"{(int)Menu.caffeMocha}.) {productList[0].Name} -- ${productList[0].Price}");
-                    Console.WriteLine($"{(int)Menu.caffeAmericano}.) {productList[1].Name} -- ${productList[1].Price}");
-                    Console.WriteLine($"{(int)Menu.cappucino}.) {productList[2].Name} -- ${productList[2].Price}");
-                    Console.WriteLine($"{(int)Menu.caffeMisto}.) {productList[3].Name} -- ${productList[3].Price}");
-                    Console.WriteLine($"{(int)Menu.chaiTeaLatte}.) {productList[4].Name} -- ${productList[4].Price}");
-                    Console.WriteLine($"{(int)Menu.londonFogTeaLatte}.) {productList[5].Name} -- ${productList[5].Price}");
-                    Console.WriteLine($"{(int)Menu.matchaTeaLatte}.) {productList[6].Name} -- ${productList[6].Price}");
-                    Console.WriteLine($"{(int)Menu.earlGrey}.) {productList[7].Name} -- ${productList[7].Price}");
-                    Console.WriteLine($"{(int)Menu.cranberryScones}.) {productList[8].Name} -- ${productList[8].Price}");
-                    Console.WriteLine($"{(int)Menu.icedLemonLoaf}.) {productList[9].Name} -- ${productList[9].Price}");
-                    Console.WriteLine($"{(int)Menu.vanillaBeanScone}.) {productList[10].Name} -- ${productList[10].Price}");
-                    Console.WriteLine($"{(int)Menu.plainBagel}.) {productList[11].Name} -- ${productList[11].Price}");
+                    for (int i = 0; i < productList.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}.) {productList[i].Name} -- ${productList[i].Price}");
+                    }
                     Console.WriteLine();
 
                     bool validOrderNumber = false;
                     do
                     {
-                        Console.WriteLine("Please enter the number preceeding the item you would like to order: ");
+                        Console.Write("Please enter the number preceeding the item you would like to order: ");
                         userInput = Console.ReadLine();
                         bool validInt = ValidationMethods.ValidateIntInput(userInput);
                         if (validInt == true)
@@ -65,13 +121,13 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         }
                         else
                         {
-                            Console.WriteLine("Sorry, that is not a valid input! Please provide an integer between 1 and 12.");
+                            Console.WriteLine($"Sorry, that is not a valid input! Please provide an integer between 1 and {productList.Count}.");
                             continue;
                         }
 
                         if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
                         {
-                            Console.WriteLine("Sorry, your input needs to be between 1 and 12!");
+                            Console.WriteLine($"Sorry, your input needs to be between 1 and {productList.Count}!");
                             validOrderNumber = false;
                         }
                         else
@@ -83,7 +139,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     bool validOrderQuantity = false;
                     while (validOrderQuantity == false) //will keep looping until we receive a valid quantity of items to be ordered
                     {
-                        Console.WriteLine("How many of these would you like to order?");
+                        Console.Write("How many of these would you like to order? ");
                         userInput = Console.ReadLine();
                         bool validInt = ValidationMethods.ValidateIntInput(userInput);
                         if (validInt == true)
@@ -364,6 +420,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
         Exit:
             Console.WriteLine("Thank you for shopping at Jitters Coffee House!");
+        EmployeeExit:
             Console.WriteLine("Please press any key to continue: ");
             Console.ReadKey();
         }
