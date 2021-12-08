@@ -39,18 +39,10 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     //displays the menu and prices for items available at the shop 
                     Console.WriteLine("Please see the menu below: ");
                     Console.WriteLine("-------------------------------");
-                    Console.WriteLine($"{(int)Menu.caffeMocha}.) {productList[0].Name} -- ${productList[0].Price}");
-                    Console.WriteLine($"{(int)Menu.caffeAmericano}.) {productList[1].Name} -- ${productList[1].Price}");
-                    Console.WriteLine($"{(int)Menu.cappucino}.) {productList[2].Name} -- ${productList[2].Price}");
-                    Console.WriteLine($"{(int)Menu.caffeMisto}.) {productList[3].Name} -- ${productList[3].Price}");
-                    Console.WriteLine($"{(int)Menu.chaiTeaLatte}.) {productList[4].Name} -- ${productList[4].Price}");
-                    Console.WriteLine($"{(int)Menu.londonFogTeaLatte}.) {productList[5].Name} -- ${productList[5].Price}");
-                    Console.WriteLine($"{(int)Menu.matchaTeaLatte}.) {productList[6].Name} -- ${productList[6].Price}");
-                    Console.WriteLine($"{(int)Menu.earlGrey}.) {productList[7].Name} -- ${productList[7].Price}");
-                    Console.WriteLine($"{(int)Menu.cranberryScones}.) {productList[8].Name} -- ${productList[8].Price}");
-                    Console.WriteLine($"{(int)Menu.icedLemonLoaf}.) {productList[9].Name} -- ${productList[9].Price}");
-                    Console.WriteLine($"{(int)Menu.vanillaBeanScone}.) {productList[10].Name} -- ${productList[10].Price}");
-                    Console.WriteLine($"{(int)Menu.plainBagel}.) {productList[11].Name} -- ${productList[11].Price}");
+                    for (int i = 0; i < productList.Length; i++)
+                    {
+                        Console.WriteLine($"{i + 1}.) {productList[i].Name} -- ${productList[i].Price}");
+                    }
                     Console.WriteLine();
 
                     bool validOrderNumber = false;
