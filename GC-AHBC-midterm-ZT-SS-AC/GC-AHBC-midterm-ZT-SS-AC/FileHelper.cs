@@ -40,11 +40,11 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             StringBuilder builder = new StringBuilder();
             builder.Append(product.Name);
             builder.Append("|");
+            builder.Append(product.Price);
+            builder.Append("|");
             builder.Append(product.Category);
             builder.Append("|");
             builder.Append(product.Description);
-            builder.Append("|");
-            builder.Append(product.Price);
             writer.WriteLine(builder.ToString());
             writer.Flush();
             writer.Close();
