@@ -14,7 +14,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
             string addressPath = @$"{Environment.CurrentDirectory}\MenuItems.txt";
 
-            Product[] productList = FileHelper.BuildMenuList(addressPath);
+            List<Product> productList = FileHelper.BuildMenuList(addressPath);
 
             bool runProgramAgain = true;
             string userInput = "";
@@ -39,7 +39,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     //displays the menu and prices for items available at the shop 
                     Console.WriteLine("Please see the menu below: ");
                     Console.WriteLine("-------------------------------");
-                    for (int i = 0; i < productList.Length; i++)
+                    for (int i = 0; i < productList.Count; i++)
                     {
                         Console.WriteLine($"{i + 1}.) {productList[i].Name} -- ${productList[i].Price}");
                     }

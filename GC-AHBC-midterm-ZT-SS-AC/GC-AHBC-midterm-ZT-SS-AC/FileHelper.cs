@@ -8,13 +8,12 @@ namespace GC_AHBC_midterm_ZT_SS_AC
     public static class FileHelper
     {
         // Reads the file for the menu items
-        public static Product[] BuildMenuList (string path)
+        public static List<Product> BuildMenuList (string path)
         {
-            Product[] productArray = new Product[12];
+            List<Product> productList = new List<Product> { };
             using (StreamReader reader = new StreamReader(path))
             {
                 string lineText;
-                int counter = 0;
                 while ((lineText = reader.ReadLine()) != null)
                 {
                     string[] items = lineText.Split('|');
@@ -28,11 +27,10 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     product.Price = double.Parse(items[1]);
                     product.Category = items[2];
                     product.Description = items[3];
-                    productArray[counter] = product;
-                    counter++;
+                    productList.Add(product);
                 }
             }
-            return productArray;
+            return productList;
         }
 
         // Adds a product to the file - This will come later but we'll have to change the Array to a List
