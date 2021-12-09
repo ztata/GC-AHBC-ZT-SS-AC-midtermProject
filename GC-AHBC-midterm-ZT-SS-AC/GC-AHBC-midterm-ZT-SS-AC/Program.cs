@@ -60,12 +60,14 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     {
                         Console.Write("Would you like to add a product to the menu (y/n)? ");
                         userInput = Console.ReadLine();
+                        
                         switch (userInput.ToLower().Trim())
                         {
                             case "n":
                                 Console.WriteLine("Ok. Have a nice day.");
                                 goto EmployeeExit;
                             case "y":
+                                AddAnotherProduct:
                                 Product product = new Product();
                                 Console.Write("Product name: ");
                                 product.Name = Console.ReadLine().Trim();
@@ -91,6 +93,15 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
                                 FileHelper.AddProductToFile(addressPath, product);
 
+                                Console.Write("Would you like to add another product (y/n)? ");
+                                userInput = Console.ReadLine();
+                                if (userInput.ToLower().Trim() == "y")
+                                {
+                                    goto AddAnotherProduct;
+                                }else if (userInput.ToLower().Trim() == "n")
+                                {
+                                    goto EmployeeExit;
+                                }
 
                                 break;
                             default:
