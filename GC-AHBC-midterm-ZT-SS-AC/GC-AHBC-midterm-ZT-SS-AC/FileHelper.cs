@@ -43,9 +43,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             builder.Append(product.Category);
             builder.Append("|");
             builder.Append(product.Description);
-            builder.Append("|");
-            builder.Append(product.Price);
-            writer.WriteLine(builder.ToString());
+            writer.WriteLine(builder.ToString(), true);
             writer.Flush();
             writer.Close();
         }

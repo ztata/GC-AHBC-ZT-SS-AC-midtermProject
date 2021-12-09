@@ -34,6 +34,65 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 Menu userMenuSelection;
                 while (orderAnotherItem) //while loop repeats while they want to keep ordering 
                 {
+                    if (userType.ToLower().Trim() == "customer")
+                    {
+                        goto Menu;
+                    }
+                    else
+                    {
+                        bool addAnotherProduct = false;
+                        do
+                        {
+                            Console.Write("Would you like to add a product to the menu (y/n)? ");
+                            userInput = Console.ReadLine();
+                            addAnotherProduct:
+                            switch (userInput.ToLower().Trim())
+                            {
+                                case "n":
+                                    goto TryAgain;
+                                case "y":
+                                    Product product = new Product();
+                                    Console.Write("Product name: ");
+                                    product.Name = Console.ReadLine().Trim();
+                                    bool validDouble = false;
+                                    do
+                                    {
+                                        Console.Write("Product price: ");
+                                        userInput = Console.ReadLine();
+                                        validDouble = ValidationMethods.ValidateDoubleInput(userInput);
+                                        if (validDouble == true)
+                                        {
+                                            product.Price = double.Parse(userInput);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Sorry, that is not a valid input! Please enter a decimal.");
+                                        }
+                                    } while (validDouble == false);
+                                    Console.Write("Product category: ");
+                                    product.Category = Console.ReadLine().Trim();
+                                    Console.Write("Product description: ");
+                                    product.Description = Console.ReadLine().Trim();
+
+                                    FileHelper.AddProductToFile(addressPath, product);
+                                    Console.Write("Would you like to add another product (y/n)? ");
+                                    userInput = Console.ReadLine();
+                                    if (userInput.ToLower().Trim() == "y")
+                                    {
+                                        goto addAnotherProduct;
+                                    }
+                                    else
+                                    {
+                                        goto TryAgain;
+                                    }
+                                    break;
+                                default:
+                                    Console.WriteLine("Please enter either 'y' or 'n'.");
+                                    continue;
+                            }
+                        } while (addAnotherProduct == false);
+                        
+                    }
 
                 Menu:
                     //displays the menu and prices for items available at the shop 
