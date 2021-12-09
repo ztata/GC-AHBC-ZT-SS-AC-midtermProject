@@ -12,7 +12,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Title = "Full Stack After Hours Bootcamp Midterm Project - Steve Schaner, April Carden, Zachary Tata";
 
-            
+
 
             bool runProgramAgain = true;
             string userInput = "";
@@ -108,7 +108,105 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         Console.WriteLine($"{i + 1}.) {productList[i].Name} -- ${productList[i].Price}");
                     }
                     Console.WriteLine();
+                    Console.WriteLine("Would you like to order now, or learn a little bit more about our products?");
+                    Console.WriteLine($"{OrderOrLearn.orderNow}). Order now");
+                    Console.WriteLine($"{OrderOrLearn.learnMore}). See product descriptions and ingredients");
+                    Console.WriteLine();
 
+                    bool validOrderOrLearn = false;
+                    int orderOrLearnChoice =-1;
+                    OrderOrLearn orderOrLearnEnum;
+                    while (validOrderOrLearn == false)
+                    {
+                        Console.WriteLine("Please enter the number preceeding your choice");
+                        userInput = Console.ReadLine();
+                        validOrderOrLearn = ValidationMethods.ValidateIntInput(userInput);
+                        if (validOrderOrLearn == true)
+                        {
+                            orderOrLearnChoice = int.Parse(userInput);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Sorry, that is not a valid input!");
+                            continue;
+                        }
+
+                        if (orderOrLearnChoice < 1 || orderOrLearnChoice > 2)
+                        {
+                            Console.WriteLine("Sorry, your choices needs to either be a 1 or 2!");
+                            continue;
+                        }
+                        else
+                        {
+                            validOrderOrLearn = true;
+                        }
+                    }
+                    //casts user choice as an enum 
+                    orderOrLearnEnum = (OrderOrLearn) orderOrLearnChoice;
+
+                    switch (orderOrLearnEnum)
+                    {
+                        case OrderOrLearn.orderNow:
+                            goto Order;
+                            break;
+                        case OrderOrLearn.learnMore:
+                            goto DescriptionAndIngredients;
+                            break;
+                    }
+
+                DescriptionAndIngredients:
+                    bool seeAnotherItem = true;
+                    while (seeAnotherItem == true) 
+                    {
+                        Console.WriteLine("Please see the menu below: ");
+                        Console.WriteLine("-------------------------------");
+                        for (int i = 0; i < productList.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}.) {productList[i].Name} -- ${productList[i].Price}");
+                        }
+                        Console.WriteLine();
+                        bool validDescriptionNumber = false;
+                        do
+                        {
+                            Console.Write("Please enter the number preceeding the item you would like to learn more about: ");
+                            userInput = Console.ReadLine();
+                            bool validInt = ValidationMethods.ValidateIntInput(userInput);
+                            if (validInt == true)
+                            {
+                                userChoice = int.Parse(userInput);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Sorry, that is not a valid input! Please provide an integer between 1 and {productList.Count}.");
+                                continue;
+                            }
+
+                            if (userChoice < 1 || userChoice > productList.Count) //makes sure it is a valid number on the menu
+                            {
+                                Console.WriteLine($"Sorry, your input needs to be between 1 and {productList.Count}!");
+                                validDescriptionNumber = false;
+                            }
+                            else
+                            {
+                                validDescriptionNumber = true;
+                            }
+                        } while (validDescriptionNumber == false);
+
+                        Console.WriteLine();
+                        Console.WriteLine("Thanks, please see product information below:");
+                        Console.WriteLine($"{productList[userChoice - 1].Name}");
+                        Console.WriteLine($"{productList[userChoice - 1].Price}");
+                        Console.WriteLine($"{productList[userChoice - 1].Category}");
+                        Console.WriteLine($"{productList[userChoice-1].Description}");
+
+                        Console.WriteLine("Would you like to see info on another item?");
+                        Console.WriteLine("Enter y to see another item or anything else to proceed to ordering");
+                        userInput = Console.ReadLine();
+                        seeAnotherItem = HelperMethods.TryAgain(userInput);
+                        Console.Clear();
+                    }
+
+                Order:
                     bool validOrderNumber = false;
                     do
                     {
@@ -135,10 +233,10 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                             validOrderNumber = true;
                         }
                     } while (validOrderNumber == false);
-                    
+
                     //we do not use this enum anymore 
                     //userMenuSelection = (Menu)userChoice; //casts user choice as an enum 
-                    
+
                     bool validOrderQuantity = false;
                     while (validOrderQuantity == false) //will keep looping until we receive a valid quantity of items to be ordered
                     {
@@ -167,7 +265,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     }
 
                     //adds user selected item to list containing current order 
-                    currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[userChoice-1]);
+                    currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[userChoice - 1]);
 
                     Console.WriteLine();
                     //displays a line total for the current item ordered
@@ -380,7 +478,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 Console.Write("Enter y to coninue or anything else to quit: ");
                 userInput = Console.ReadLine();
                 runProgramAgain = HelperMethods.TryAgain(userInput);
-               
+
             } while (runProgramAgain);
 
         Exit:

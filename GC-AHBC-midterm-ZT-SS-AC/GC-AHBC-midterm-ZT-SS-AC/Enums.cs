@@ -32,4 +32,10 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         Employee = 1,
         Customer
     }
+
+    public enum OrderOrLearn
+    {
+        orderNow = 1,
+        learnMore
+    }
 }
