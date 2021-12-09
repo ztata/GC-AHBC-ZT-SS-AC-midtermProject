@@ -26,10 +26,4 @@ namespace GC_AHBC_midterm_ZT_SS_AC
         Check,
         Card
     }
-
-    public enum PersonType
-    {
-        Employee = 1,
-        Customer
-    }
 }
