@@ -12,9 +12,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Title = "Full Stack After Hours Bootcamp Midterm Project - Steve Schaner, April Carden, Zachary Tata";
 
-            string addressPath = @$"{Environment.CurrentDirectory}\MenuItems.txt";
-
-            List<Product> productList = FileHelper.BuildMenuList(addressPath);
+            
 
             bool runProgramAgain = true;
             string userInput = "";
@@ -27,6 +25,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
             do//repeats the program if the user chooses
             {
+                string addressPath = @$"{Environment.CurrentDirectory}\MenuItems.txt";
+                List<Product> productList = FileHelper.BuildMenuList(addressPath);
                 Console.Clear();
                 Console.WriteLine("Hello and welcome to Jitters Coffee House!");
 
@@ -125,7 +125,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                             continue;
                         }
 
-                        if (userChoice < 1 || userChoice > 12) //makes sure it is a valid number for enum selection
+                        if (userChoice < 1 || userChoice > productList.Count) //makes sure it is a valid number for enum selection
                         {
                             Console.WriteLine($"Sorry, your input needs to be between 1 and {productList.Count}!");
                             validOrderNumber = false;
@@ -135,7 +135,10 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                             validOrderNumber = true;
                         }
                     } while (validOrderNumber == false);
-                    userMenuSelection = (Menu)userChoice; //casts user choice as an enum 
+                    
+                    //we do not use this enum anymore 
+                    //userMenuSelection = (Menu)userChoice; //casts user choice as an enum 
+                    
                     bool validOrderQuantity = false;
                     while (validOrderQuantity == false) //will keep looping until we receive a valid quantity of items to be ordered
                     {
@@ -152,7 +155,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                             continue;
                         }
 
-                        if (numberToOrder < 1) //makes sure it is a valid number for enum selection
+                        if (numberToOrder < 1) //makes sure it is a valid number to order
                         {
                             Console.WriteLine("Sorry, you can't order less than 1 of an item!");
                             continue;
@@ -163,46 +166,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         }
                     }
 
-                    //switch will add user choice to the list for their current order 
-                    switch (userMenuSelection)
-                    {
-                        case Menu.caffeMocha:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[0]);
-                            break;
-                        case Menu.caffeAmericano:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[1]);
-                            break;
-                        case Menu.cappucino:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[2]);
-                            break;
-                        case Menu.caffeMisto:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[3]);
-                            break;
-                        case Menu.chaiTeaLatte:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[4]);
-                            break;
-                        case Menu.londonFogTeaLatte:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[5]);
-                            break;
-                        case Menu.matchaTeaLatte:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[6]);
-                            break;
-                        case Menu.earlGrey:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[7]);
-                            break;
-                        case Menu.cranberryScones:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[8]);
-                            break;
-                        case Menu.icedLemonLoaf:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[9]);
-                            break;
-                        case Menu.vanillaBeanScone:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[10]);
-                            break;
-                        case Menu.plainBagel:
-                            currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[11]);
-                            break;
-                    }
+                    //adds user selected item to list containing current order 
+                    currentOrderList = HelperMethods.AddItemToOrder(numberToOrder, currentOrderList, productList[userChoice-1]);
 
                     Console.WriteLine();
                     //displays a line total for the current item ordered
