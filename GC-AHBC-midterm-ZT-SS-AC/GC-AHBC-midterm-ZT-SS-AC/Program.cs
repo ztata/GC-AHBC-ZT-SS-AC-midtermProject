@@ -29,6 +29,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 List<Product> productList = FileHelper.BuildMenuList(addressPath);
                 Console.Clear();
                 Console.WriteLine("Hello and welcome to Jitters Coffee House!");
+                Console.WriteLine();
 
                 bool validUserType = false;
                 do
@@ -67,47 +68,47 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                                 Console.WriteLine("Ok. Have a nice day.");
                                 goto EmployeeExit;
                             case "y":
-                                AddAnotherProduct:
-                                Product product = new Product();
-                                Console.Write("Product name: ");
-                                product.Name = Console.ReadLine().Trim();
-                                bool validDouble = false;
-                                do
+                            AddAnotherProduct:
+                                bool addAnotherProduct = true;
+                                while (addAnotherProduct == true)
                                 {
-                                    Console.Write("Product price: ");
+                                    Product product = new Product();
+                                    Console.Write("Product name: ");
+                                    product.Name = Console.ReadLine().Trim();
+                                    bool validDouble = false;
+                                    do
+                                    {
+                                        Console.Write("Product price: ");
+                                        userInput = Console.ReadLine();
+                                        validDouble = ValidationMethods.ValidateDoubleInput(userInput);
+                                        if (validDouble == true)
+                                        {
+                                            product.Price = double.Parse(userInput);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Sorry, that is not a valid input! Please enter a decimal.");
+                                        }
+                                    } while (validDouble == false);
+                                    Console.Write("Product category: ");
+                                    product.Category = Console.ReadLine().Trim();
+                                    Console.Write("Product description: ");
+                                    product.Description = Console.ReadLine().Trim();
+
+                                    FileHelper.AddProductToFile(addressPath, product);
+
+                                    Console.WriteLine("Would you like to add another product?");
+                                    Console.Write("Enter y to add another or anything else to proceed: ");
                                     userInput = Console.ReadLine();
-                                    validDouble = ValidationMethods.ValidateDoubleInput(userInput);
-                                    if (validDouble == true)
-                                    {
-                                        product.Price = double.Parse(userInput);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Sorry, that is not a valid input! Please enter a decimal.");
-                                    }
-                                } while (validDouble == false);
-                                Console.Write("Product category: ");
-                                product.Category = Console.ReadLine().Trim();
-                                Console.Write("Product description: ");
-                                product.Description = Console.ReadLine().Trim();
+                                    addAnotherProduct = HelperMethods.TryAgain(userInput);
 
-                                FileHelper.AddProductToFile(addressPath, product);
-
-                                Console.Write("Would you like to add another product (y/n)? ");
-                                userInput = Console.ReadLine();
-                                if (userInput.ToLower().Trim() == "y")
-                                {
-                                    goto AddAnotherProduct;
-                                }else if (userInput.ToLower().Trim() == "n")
-                                {
-                                    goto EmployeeExit;
                                 }
-
                                 break;
                             default:
                                 Console.WriteLine("Please enter either 'y' or 'n'.");
                                 continue;
                         }
+                        goto TryAgain;
                     }
 
                 Menu:
@@ -120,8 +121,8 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     }
                     Console.WriteLine();
                     Console.WriteLine("Would you like to order now, or learn a little bit more about our products?");
-                    Console.WriteLine($"{OrderOrLearn.orderNow}). Order now");
-                    Console.WriteLine($"{OrderOrLearn.learnMore}). See product descriptions and ingredients");
+                    Console.WriteLine($"{(int)OrderOrLearn.orderNow}). Order now");
+                    Console.WriteLine($"{(int)OrderOrLearn.learnMore}). See product descriptions and ingredients");
                     Console.WriteLine();
 
                     bool validOrderOrLearn = false;
@@ -129,7 +130,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     OrderOrLearn orderOrLearnEnum;
                     while (validOrderOrLearn == false)
                     {
-                        Console.WriteLine("Please enter the number preceeding your choice");
+                        Console.Write("Please enter the number preceeding your choice: ");
                         userInput = Console.ReadLine();
                         validOrderOrLearn = ValidationMethods.ValidateIntInput(userInput);
                         if (validOrderOrLearn == true)
@@ -139,12 +140,14 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         else
                         {
                             Console.WriteLine("Sorry, that is not a valid input!");
+
                             continue;
                         }
 
                         if (orderOrLearnChoice < 1 || orderOrLearnChoice > 2)
                         {
                             Console.WriteLine("Sorry, your choices needs to either be a 1 or 2!");
+                            validOrderOrLearn = false;
                             continue;
                         }
                         else
@@ -173,7 +176,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                         Console.WriteLine("-------------------------------");
                         for (int i = 0; i < productList.Count; i++)
                         {
-                            Console.WriteLine($"{i + 1}.) {productList[i].Name} -- ${productList[i].Price}");
+                            Console.WriteLine($"{i + 1}.) {productList[i].Name}");
                         }
                         Console.WriteLine();
                         bool validDescriptionNumber = false;
@@ -205,13 +208,14 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
                         Console.WriteLine();
                         Console.WriteLine("Thanks, please see product information below:");
-                        Console.WriteLine($"{productList[userChoice - 1].Name}");
-                        Console.WriteLine($"{productList[userChoice - 1].Price}");
-                        Console.WriteLine($"{productList[userChoice - 1].Category}");
-                        Console.WriteLine($"{productList[userChoice-1].Description}");
-
+                        Console.WriteLine();
+                        Console.WriteLine($"Name: {productList[userChoice - 1].Name}");
+                        Console.WriteLine($"Price: ${productList[userChoice - 1].Price}");
+                        Console.WriteLine($"Category: {productList[userChoice - 1].Category}");
+                        Console.WriteLine($"Description: {productList[userChoice - 1].Description}");
+                        Console.WriteLine();
                         Console.WriteLine("Would you like to see info on another item?");
-                        Console.WriteLine("Enter y to see another item or anything else to proceed to ordering");
+                        Console.Write("Enter y to see another item or anything else to proceed to ordering: ");
                         userInput = Console.ReadLine();
                         seeAnotherItem = HelperMethods.TryAgain(userInput);
                         Console.Clear();
@@ -244,9 +248,6 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                             validOrderNumber = true;
                         }
                     } while (validOrderNumber == false);
-
-                    //we do not use this enum anymore 
-                    //userMenuSelection = (Menu)userChoice; //casts user choice as an enum 
 
                     bool validOrderQuantity = false;
                     while (validOrderQuantity == false) //will keep looping until we receive a valid quantity of items to be ordered
@@ -312,7 +313,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     Console.WriteLine($"{(int)PaymentMethod.Card}.) {PaymentMethod.Card} ");
 
                     Console.WriteLine();
-                    Console.WriteLine("Please enter the number preceeding your choice.");
+                    Console.Write("Please enter the number preceeding your choice: ");
                     userInput = Console.ReadLine();
                     bool validInt = ValidationMethods.ValidateIntInput(userInput);
                     if (validInt == true)
@@ -357,7 +358,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 double amountTendered = 0.0;
                 while (validAmountTendered == false) //keeps looping until they offer a valid number for the amount tendered 
                 {
-                    Console.WriteLine("How much are you providing for payment?");
+                    Console.Write("How much are you providing for payment? ");
                     userInput = Console.ReadLine();
                     bool validDouble = ValidationMethods.ValidateDoubleInput(userInput);
                     if (validDouble == true)
@@ -401,7 +402,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 while (validCheckNumber == false)
                 {
                     Console.WriteLine();
-                    Console.WriteLine("What is the four digit check number from the check you would like to pay with (numbers only please)?");
+                    Console.Write("What is the four digit check number from the check you would like to pay with (numbers only please)? ");
                     userInput = Console.ReadLine();
                     validCheckNumber = BillingRegexMethods.ValidateCheckNumber(userInput.Trim());
                     if (validCheckNumber == false)
@@ -424,7 +425,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 while (validCardNumber == false)
                 {
                     Console.WriteLine();
-                    Console.WriteLine("Please enter the number on the card you would like to use in the following format(dashes included): XXXX-XXXX-XXXX-XXXX");
+                    Console.Write("Please enter the number on the card you would like to use in the following format(dashes included): XXXX-XXXX-XXXX-XXXX: ");
                     userInput = Console.ReadLine();
                     validCardNumber = BillingRegexMethods.ValidateCardNumber(userInput.Trim());
                     if (validCardNumber == false)
@@ -441,7 +442,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 while (validExpirationDate == false)
                 {
                     Console.WriteLine();
-                    Console.WriteLine("Please enter the expiration date on your card using the following format (slashes included): MM/YYYY");
+                    Console.Write("Please enter the expiration date on your card using the following format (slashes included): MM/YYYY: ");
                     userInput = Console.ReadLine();
                     validExpirationDate = BillingRegexMethods.ValidateExpirationDate(userInput.Trim());
                     if (validExpirationDate == false)
@@ -457,7 +458,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 Console.WriteLine();
                 while (validCWCode == false)
                 {
-                    Console.WriteLine("Please enter the 3 digit CW code on your card: ");
+                    Console.Write("Please enter the 3 digit CW code on your card: ");
                     userInput = Console.ReadLine();
                     validCWCode = BillingRegexMethods.ValidateCWCode(userInput.Trim());
                     if (validCWCode == false)
@@ -485,7 +486,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 currentOrderList.Clear();
 
             TryAgain:
-                Console.WriteLine("Would you like to place another order?");
+                Console.WriteLine("Would you like to repeat the program?");
                 Console.Write("Enter y to coninue or anything else to quit: ");
                 userInput = Console.ReadLine();
                 runProgramAgain = HelperMethods.TryAgain(userInput);
