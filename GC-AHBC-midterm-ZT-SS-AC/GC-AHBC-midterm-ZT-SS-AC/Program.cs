@@ -19,6 +19,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             int numberToOrder = -1;
             int userChoice = -1;
             string userType = "";
+
             //list of items the patron has ordered 
             List<Product> currentOrderList = new List<Product>();
 
@@ -27,8 +28,10 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             {
                 string addressPath = @$"{Environment.CurrentDirectory}\MenuItems.txt";
                 List<Product> productList = FileHelper.BuildMenuList(addressPath);
+                string menu = HelperMethods.DisplayMenu(productList);
                 Console.Clear();
                 Console.WriteLine("Hello and welcome to Jitters Coffee House!");
+                Console.WriteLine();
 
                 bool validUserType = false;
                 do
@@ -50,24 +53,26 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 //bool value that allows them to loop and order another item 
                 bool orderAnotherItem = true;
                 Menu userMenuSelection;
-                while (orderAnotherItem) //while loop repeats while they want to keep ordering 
+
+                if (userType.ToLower().Trim() == "customer")
                 {
-                    if (userType.ToLower().Trim() == "customer")
+                    goto Menu;
+                }
+                else
+                {
+                    Console.Write("Would you like to add a product to the menu (y/n)? ");
+                    userInput = Console.ReadLine();
+
+                    switch (userInput.ToLower().Trim())
                     {
-                        goto Menu;
-                    }
-                    else
-                    {
-                        Console.Write("Would you like to add a product to the menu (y/n)? ");
-                        userInput = Console.ReadLine();
-                        
-                        switch (userInput.ToLower().Trim())
-                        {
-                            case "n":
-                                Console.WriteLine("Ok. Have a nice day.");
-                                goto EmployeeExit;
-                            case "y":
-                                AddAnotherProduct:
+                        case "n":
+                            Console.WriteLine("Ok. Have a nice day.");
+                            goto EmployeeExit;
+                        case "y":
+                        AddAnotherProduct:
+                            bool addAnotherProduct = true;
+                            while (addAnotherProduct == true)
+                            {
                                 Product product = new Product();
                                 Console.Write("Product name: ");
                                 product.Name = Console.ReadLine().Trim();
@@ -93,131 +98,126 @@ namespace GC_AHBC_midterm_ZT_SS_AC
 
                                 FileHelper.AddProductToFile(addressPath, product);
 
-                                Console.Write("Would you like to add another product (y/n)? ");
+                                Console.WriteLine("Would you like to add another product?");
+                                Console.Write("Enter y to add another or anything else to proceed: ");
                                 userInput = Console.ReadLine();
-                                if (userInput.ToLower().Trim() == "y")
-                                {
-                                    goto AddAnotherProduct;
-                                }else if (userInput.ToLower().Trim() == "n")
-                                {
-                                    goto EmployeeExit;
-                                }
+                                addAnotherProduct = HelperMethods.TryAgain(userInput);
 
-                                break;
-                            default:
-                                Console.WriteLine("Please enter either 'y' or 'n'.");
-                                continue;
-                        }
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Please enter either 'y' or 'n'.");
+                            continue;
+                    }
+                    goto TryAgain;
+                }
+
+            Menu:
+                //displays the menu and prices for items available at the shop 
+                Console.WriteLine(menu);
+
+                Console.WriteLine();
+                Console.WriteLine("Would you like to order now, or learn a little bit more about our products?");
+                Console.WriteLine($"{(int)OrderOrLearn.orderNow}). Order now");
+                Console.WriteLine($"{(int)OrderOrLearn.learnMore}). See product descriptions and ingredients");
+                Console.WriteLine();
+
+                bool validOrderOrLearn = false;
+                int orderOrLearnChoice = -1;
+                OrderOrLearn orderOrLearnEnum;
+                while (validOrderOrLearn == false)
+                {
+                    Console.Write("Please enter the number preceeding your choice: ");
+                    userInput = Console.ReadLine();
+                    validOrderOrLearn = ValidationMethods.ValidateIntInput(userInput);
+                    if (validOrderOrLearn == true)
+                    {
+                        orderOrLearnChoice = int.Parse(userInput);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sorry, that is not a valid input!");
+
+                        continue;
                     }
 
-                Menu:
-                    //displays the menu and prices for items available at the shop 
-                    Console.WriteLine("Please see the menu below: ");
-                    Console.WriteLine("-------------------------------");
-                    for (int i = 0; i < productList.Count; i++)
+                    if (orderOrLearnChoice < 1 || orderOrLearnChoice > 2)
                     {
-                        Console.WriteLine($"{i + 1}.) {productList[i].Name} -- ${productList[i].Price}");
+                        Console.WriteLine("Sorry, your choices needs to either be a 1 or 2!");
+                        validOrderOrLearn = false;
+                        continue;
                     }
-                    Console.WriteLine();
-                    Console.WriteLine("Would you like to order now, or learn a little bit more about our products?");
-                    Console.WriteLine($"{OrderOrLearn.orderNow}). Order now");
-                    Console.WriteLine($"{OrderOrLearn.learnMore}). See product descriptions and ingredients");
-                    Console.WriteLine();
-
-                    bool validOrderOrLearn = false;
-                    int orderOrLearnChoice =-1;
-                    OrderOrLearn orderOrLearnEnum;
-                    while (validOrderOrLearn == false)
+                    else
                     {
-                        Console.WriteLine("Please enter the number preceeding your choice");
+                        validOrderOrLearn = true;
+                    }
+                }
+                //casts user choice as an enum 
+                orderOrLearnEnum = (OrderOrLearn)orderOrLearnChoice;
+
+                switch (orderOrLearnEnum)
+                {
+                    case OrderOrLearn.orderNow:
+                        goto Order;
+                        break;
+                    case OrderOrLearn.learnMore:
+                        goto DescriptionAndIngredients;
+                        break;
+                }
+
+            DescriptionAndIngredients:
+                bool seeAnotherItem = true;
+                while (seeAnotherItem == true)
+                {
+                    string menuWithoutPrice = HelperMethods.DisplayMenuWithoutPrice(productList);
+                    Console.WriteLine(menuWithoutPrice);
+                    Console.WriteLine();
+                    bool validDescriptionNumber = false;
+                    do
+                    {
+                        Console.Write("Please enter the number preceeding the item you would like to learn more about: ");
                         userInput = Console.ReadLine();
-                        validOrderOrLearn = ValidationMethods.ValidateIntInput(userInput);
-                        if (validOrderOrLearn == true)
+                        bool validInt = ValidationMethods.ValidateIntInput(userInput);
+                        if (validInt == true)
                         {
-                            orderOrLearnChoice = int.Parse(userInput);
+                            userChoice = int.Parse(userInput);
                         }
                         else
                         {
-                            Console.WriteLine("Sorry, that is not a valid input!");
+                            Console.WriteLine($"Sorry, that is not a valid input! Please provide an integer between 1 and {productList.Count}.");
                             continue;
                         }
 
-                        if (orderOrLearnChoice < 1 || orderOrLearnChoice > 2)
+                        if (userChoice < 1 || userChoice > productList.Count) //makes sure it is a valid number on the menu
                         {
-                            Console.WriteLine("Sorry, your choices needs to either be a 1 or 2!");
-                            continue;
+                            Console.WriteLine($"Sorry, your input needs to be between 1 and {productList.Count}!");
+                            validDescriptionNumber = false;
                         }
                         else
                         {
-                            validOrderOrLearn = true;
+                            validDescriptionNumber = true;
                         }
-                    }
-                    //casts user choice as an enum 
-                    orderOrLearnEnum = (OrderOrLearn) orderOrLearnChoice;
+                    } while (validDescriptionNumber == false);
 
-                    switch (orderOrLearnEnum)
-                    {
-                        case OrderOrLearn.orderNow:
-                            goto Order;
-                            break;
-                        case OrderOrLearn.learnMore:
-                            goto DescriptionAndIngredients;
-                            break;
-                    }
+                    Console.WriteLine();
+                    Console.WriteLine("Thanks, please see product information below:");
+                    Console.WriteLine();
+                    Console.WriteLine($"Name: {productList[userChoice - 1].Name}");
+                    Console.WriteLine($"Price: ${productList[userChoice - 1].Price}");
+                    Console.WriteLine($"Category: {productList[userChoice - 1].Category}");
+                    Console.WriteLine($"Description: {productList[userChoice - 1].Description}");
+                    Console.WriteLine();
+                    Console.WriteLine("Would you like to see info on another item?");
+                    Console.Write("Enter y to see another item or anything else to proceed to ordering: ");
+                    userInput = Console.ReadLine();
+                    seeAnotherItem = HelperMethods.TryAgain(userInput);
+                    Console.Clear();
+                }
 
-                DescriptionAndIngredients:
-                    bool seeAnotherItem = true;
-                    while (seeAnotherItem == true) 
-                    {
-                        Console.WriteLine("Please see the menu below: ");
-                        Console.WriteLine("-------------------------------");
-                        for (int i = 0; i < productList.Count; i++)
-                        {
-                            Console.WriteLine($"{i + 1}.) {productList[i].Name} -- ${productList[i].Price}");
-                        }
-                        Console.WriteLine();
-                        bool validDescriptionNumber = false;
-                        do
-                        {
-                            Console.Write("Please enter the number preceeding the item you would like to learn more about: ");
-                            userInput = Console.ReadLine();
-                            bool validInt = ValidationMethods.ValidateIntInput(userInput);
-                            if (validInt == true)
-                            {
-                                userChoice = int.Parse(userInput);
-                            }
-                            else
-                            {
-                                Console.WriteLine($"Sorry, that is not a valid input! Please provide an integer between 1 and {productList.Count}.");
-                                continue;
-                            }
+            Order:
+                while (orderAnotherItem) //while loop repeats while they want to keep ordering 
+                {
 
-                            if (userChoice < 1 || userChoice > productList.Count) //makes sure it is a valid number on the menu
-                            {
-                                Console.WriteLine($"Sorry, your input needs to be between 1 and {productList.Count}!");
-                                validDescriptionNumber = false;
-                            }
-                            else
-                            {
-                                validDescriptionNumber = true;
-                            }
-                        } while (validDescriptionNumber == false);
-
-                        Console.WriteLine();
-                        Console.WriteLine("Thanks, please see product information below:");
-                        Console.WriteLine($"{productList[userChoice - 1].Name}");
-                        Console.WriteLine($"{productList[userChoice - 1].Price}");
-                        Console.WriteLine($"{productList[userChoice - 1].Category}");
-                        Console.WriteLine($"{productList[userChoice-1].Description}");
-
-                        Console.WriteLine("Would you like to see info on another item?");
-                        Console.WriteLine("Enter y to see another item or anything else to proceed to ordering");
-                        userInput = Console.ReadLine();
-                        seeAnotherItem = HelperMethods.TryAgain(userInput);
-                        Console.Clear();
-                    }
-
-                Order:
                     bool validOrderNumber = false;
                     do
                     {
@@ -244,9 +244,6 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                             validOrderNumber = true;
                         }
                     } while (validOrderNumber == false);
-
-                    //we do not use this enum anymore 
-                    //userMenuSelection = (Menu)userChoice; //casts user choice as an enum 
 
                     bool validOrderQuantity = false;
                     while (validOrderQuantity == false) //will keep looping until we receive a valid quantity of items to be ordered
@@ -289,8 +286,9 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     userInput = Console.ReadLine();
                     orderAnotherItem = HelperMethods.TryAgain(userInput);
                     Console.Clear();
-
+                    Console.WriteLine(menu);
                 }
+                Console.Clear();
 
                 //variables to hold the various totals created using methods in BillingTotal class
                 double miSalesTax = 0.06;
@@ -312,7 +310,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                     Console.WriteLine($"{(int)PaymentMethod.Card}.) {PaymentMethod.Card} ");
 
                     Console.WriteLine();
-                    Console.WriteLine("Please enter the number preceeding your choice.");
+                    Console.Write("Please enter the number preceeding your choice: ");
                     userInput = Console.ReadLine();
                     bool validInt = ValidationMethods.ValidateIntInput(userInput);
                     if (validInt == true)
@@ -357,7 +355,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 double amountTendered = 0.0;
                 while (validAmountTendered == false) //keeps looping until they offer a valid number for the amount tendered 
                 {
-                    Console.WriteLine("How much are you providing for payment?");
+                    Console.Write("How much are you providing for payment? ");
                     userInput = Console.ReadLine();
                     bool validDouble = ValidationMethods.ValidateDoubleInput(userInput);
                     if (validDouble == true)
@@ -401,7 +399,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 while (validCheckNumber == false)
                 {
                     Console.WriteLine();
-                    Console.WriteLine("What is the four digit check number from the check you would like to pay with (numbers only please)?");
+                    Console.Write("What is the four digit check number from the check you would like to pay with (numbers only please)? ");
                     userInput = Console.ReadLine();
                     validCheckNumber = BillingRegexMethods.ValidateCheckNumber(userInput.Trim());
                     if (validCheckNumber == false)
@@ -424,7 +422,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 while (validCardNumber == false)
                 {
                     Console.WriteLine();
-                    Console.WriteLine("Please enter the number on the card you would like to use in the following format(dashes included): XXXX-XXXX-XXXX-XXXX");
+                    Console.Write("Please enter the number on the card you would like to use in the following format(dashes included): XXXX-XXXX-XXXX-XXXX: ");
                     userInput = Console.ReadLine();
                     validCardNumber = BillingRegexMethods.ValidateCardNumber(userInput.Trim());
                     if (validCardNumber == false)
@@ -441,7 +439,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 while (validExpirationDate == false)
                 {
                     Console.WriteLine();
-                    Console.WriteLine("Please enter the expiration date on your card using the following format (slashes included): MM/YYYY");
+                    Console.Write("Please enter the expiration date on your card using the following format (slashes included): MM/YYYY: ");
                     userInput = Console.ReadLine();
                     validExpirationDate = BillingRegexMethods.ValidateExpirationDate(userInput.Trim());
                     if (validExpirationDate == false)
@@ -457,7 +455,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 Console.WriteLine();
                 while (validCWCode == false)
                 {
-                    Console.WriteLine("Please enter the 3 digit CW code on your card: ");
+                    Console.Write("Please enter the 3 digit CW code on your card: ");
                     userInput = Console.ReadLine();
                     validCWCode = BillingRegexMethods.ValidateCWCode(userInput.Trim());
                     if (validCWCode == false)
@@ -485,7 +483,7 @@ namespace GC_AHBC_midterm_ZT_SS_AC
                 currentOrderList.Clear();
 
             TryAgain:
-                Console.WriteLine("Would you like to place another order?");
+                Console.WriteLine("Would you like to repeat the program?");
                 Console.Write("Enter y to coninue or anything else to quit: ");
                 userInput = Console.ReadLine();
                 runProgramAgain = HelperMethods.TryAgain(userInput);

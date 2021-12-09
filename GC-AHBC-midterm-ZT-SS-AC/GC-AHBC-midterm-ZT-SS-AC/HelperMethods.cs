@@ -43,5 +43,31 @@ namespace GC_AHBC_midterm_ZT_SS_AC
             }
             return currentOrderList;
         }
+
+        public static string DisplayMenu(List<Product> productList)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Please see the menu below: ");
+            builder.Append("\n-------------------------------");
+            for (int i = 0; i < productList.Count; i++)
+            {
+                builder.Append($"\n{i + 1}.) {productList[i].Name} -- ${productList[i].Price}");
+            }
+            string message = builder.ToString();
+            return message;
+        }
+
+        public static string DisplayMenuWithoutPrice(List<Product> productList)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Please see the menu below: ");
+            builder.Append("\n-------------------------------");
+            for (int i = 0; i < productList.Count; i++)
+            {
+                builder.Append($"\n{i + 1}.) {productList[i].Name}");
+            }
+            string message = builder.ToString();
+            return message;
+        }
     }
 }

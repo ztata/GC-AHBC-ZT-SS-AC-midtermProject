@@ -10,3 +10,4 @@ Cranberry Scones|6.25|Bakery|Enriched Flour, Brown Sugar, Cream Cheese, Butter, 
 Iced Lemon Loaf|5.95|Bakery|Enriched Wheat Flour, Sugar, Eggs, Butter, Powdered Sugar, Buttermilk, Lemon Juice, Lemon Zest, Soybean Oil, Water, Corn Syrup, Sea Salt, Baking Powder, Baking Soda
 Vanilla Bean Scone|2.25|Bakery|Enriched Flour, Heavy Cream, Butter, Sugar, Water, Sugar, Eggs, Soybean Oil, Nonfat Dry Milk, Leavening, Soy Lecithin, Salt, Natural Flavor, Candied Lemon Peel
 Plain Bagel|2.95|Bakery|Enriched Wheat Flour, Water, Rye Flour, Sugar, Salt, Yeast, Vegetable Oil [Canola, Soyabean], Preservative [Calcium Propionate]
+
